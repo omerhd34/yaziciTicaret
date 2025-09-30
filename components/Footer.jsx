@@ -30,7 +30,12 @@ export default function Footer() {
        </li>
        <li>
         <a href="/kargo-takip" className="text-gray-300 hover:text-white">
-         Kargo Takip
+         İstek Takibi
+        </a>
+       </li>
+       <li>
+        <a href="/destek" className="text-gray-300 hover:text-white">
+         Destek
         </a>
        </li>
        <li>
@@ -41,7 +46,6 @@ export default function Footer() {
       </ul>
      </div>
     </div>
-
     <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
      <p>&copy; {new Date().getFullYear()} Yazıcı Ticaret. Tüm hakları saklıdır.</p>
     </div>

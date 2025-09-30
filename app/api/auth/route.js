@@ -6,7 +6,7 @@ export async function POST(request) {
 
     // Admin bilgileri
     const ADMIN_USERNAME = "yaziciticaret";
-    const ADMIN_PASSWORD = "Selaminko123";
+    const ADMIN_PASSWORD = "123456";
 
     if (kullaniciAdi === ADMIN_USERNAME && sifre === ADMIN_PASSWORD) {
       // Basit bir token oluştur

@@ -44,21 +44,17 @@ export async function PUT(request) {
 export async function DELETE(request) {
   try {
     const { id } = await request.json();
-
     const client = await clientPromise;
     const db = client.db("yaziciticaret");
-
     const result = await db
       .collection("talepler")
       .deleteOne({ _id: new ObjectId(id) });
-
     if (result.deletedCount === 0) {
       return NextResponse.json(
         { success: false, message: "Talep bulunamadı" },
         { status: 404 }
       );
     }
-
     return NextResponse.json({
       success: true,
       message: "Talep silindi",

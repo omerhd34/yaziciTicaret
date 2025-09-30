@@ -7,8 +7,8 @@ export default function GaleriSection() {
 
  const images = [
   { id: 1, url: './tv.png', alt: 'Televizyon', baslik: 'Akıllı Televizyonlar', padding: 'p-20' },
-  { id: 2, url: './beyazesya.png', alt: 'Beyaz Eşya', baslik: 'Beyaz Eşya Ürünleri', padding: 'p-8' },
-  { id: 3, url: './ankastre.png', alt: 'Ankastre', baslik: 'Ankastre Set', padding: 'p-8' },
+  { id: 2, url: './beyazesya.png', alt: 'Beyaz Eşya', baslik: 'Beyaz Eşya Ürünleri', padding: '' },
+  { id: 3, url: './ankastre.png', alt: 'Ankastre', baslik: 'Ankastre Set', padding: 'p-15' },
   { id: 4, url: './supurge.png', alt: 'Elektrikli Süpürge', baslik: 'Elektrikli Süpürgeler', padding: 'p-12' },
   { id: 5, url: './susebili.png', alt: 'Su Sebili', baslik: 'Su Sebilleri', padding: 'p-12' },
   { id: 6, url: './suaritma.png', alt: 'Su Arıtma', baslik: 'Su Arıtma Cihazları', padding: 'p-20' },
@@ -43,7 +43,7 @@ export default function GaleriSection() {
   <section className="py-16 bg-gradient-to-b from-white to-gray-50">
    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="text-center mb-12">
-     <h2 className="text-4xl font-bold text-gray-900 mb-4">
+     <h2 className="font-bold text-gray-900 mb-4 text-3xl sm:text-5xl">
       Ürünlerimiz
      </h2>
      <p className="text-lg text-gray-600">
@@ -119,7 +119,7 @@ export default function GaleriSection() {
      </div>
     </div>
 
-    <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 mt-8">
+    <div className="hidden md:grid grid-cols-3 sm:grid-cols-6 gap-4 mt-8">
      {images.map((image, index) => (
       <button
        key={image.id}

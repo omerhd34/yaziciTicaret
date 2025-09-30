@@ -4,7 +4,7 @@ import { useState } from 'react';
 export default function DestekPage() {
  const [formData, setFormData] = useState({
   name: '',
-  email: '',
+  phone: '',
   subject: '',
   message: ''
  });
@@ -26,7 +26,7 @@ export default function DestekPage() {
 
    if (res.ok) {
     setStatus('Mesajınız başarıyla gönderildi!');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setFormData({ name: '', phone: '', subject: '', message: '' });
    } else {
     setStatus('Bir hata oluştu, lütfen tekrar deneyin.');
    }
@@ -47,7 +47,7 @@ export default function DestekPage() {
     className="w-full max-w-xl bg-white p-8 rounded-lg shadow-lg space-y-6"
    >
     <div>
-     <label className="block text-sm font-medium text-gray-700 mb-1">İsim</label>
+     <label className="block text-sm font-medium text-gray-700 mb-1">Ad Soyad *</label>
      <input
       type="text"
       name="name"
@@ -59,19 +59,20 @@ export default function DestekPage() {
     </div>
 
     <div>
-     <label className="block text-sm font-medium text-gray-700 mb-1">E-posta</label>
+     <label className="block text-sm font-medium text-gray-700 mb-1">Telefon *</label>
      <input
-      type="email"
-      name="email"
-      value={formData.email}
+      type="tel"
+      name="phone"
+      value={formData.phone}
       onChange={handleChange}
       required
       className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
      />
     </div>
 
+
     <div>
-     <label className="block text-sm font-medium text-gray-700 mb-1">Konu</label>
+     <label className="block text-sm font-medium text-gray-700 mb-1">Konu *</label>
      <input
       type="text"
       name="subject"
@@ -83,7 +84,7 @@ export default function DestekPage() {
     </div>
 
     <div>
-     <label className="block text-sm font-medium text-gray-700 mb-1">Mesaj</label>
+     <label className="block text-sm font-medium text-gray-700 mb-1">Mesaj *</label>
      <textarea
       name="message"
       value={formData.message}

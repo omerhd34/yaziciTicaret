@@ -45,7 +45,7 @@ export default function KargoTakipPage() {
  return (
   <div className="py-16 bg-gray-50 min-h-screen">
    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h1 className="text-4xl font-bold text-center mb-8">Kargo Takip</h1>
+    <h1 className="text-3xl sm:text-4xl font-bold text-center mb-8 text-blue-800">İstek Takibi</h1>
 
     <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
      <p className="text-gray-700 mb-6">
