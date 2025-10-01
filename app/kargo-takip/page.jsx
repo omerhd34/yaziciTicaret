@@ -1,27 +1,38 @@
-'use client';
+"use client";
 import { useState } from 'react';
 
 export default function KargoTakipPage() {
- const [adSoyad, setAdSoyad] = useState('');
+ const [telefon, setTelefon] = useState('');
  const [kargolar, setKargolar] = useState([]);
  const [mesaj, setMesaj] = useState('');
  const [arandiMi, setArandiMi] = useState(false);
  const [yukleniyor, setYukleniyor] = useState(false);
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
+ const handleSubmit = async () => {
+  if (!telefon.trim()) {
+   setMesaj('Lütfen telefon numarası giriniz.');
+   return;
+  }
+
+  const temizTelefon = telefon.replace(/[\s\-\(\)]/g, '');
+
+  if (temizTelefon.length < 10) {
+   setMesaj('Lütfen telefon numarasının tamamını giriniz (en az 10 hane).');
+   return;
+  }
+
   setMesaj('');
   setArandiMi(true);
   setYukleniyor(true);
 
   try {
-   const response = await fetch(`/api/kargo-sorgula?adSoyad=${encodeURIComponent(adSoyad)}`);
+   const response = await fetch(`/api/kargo-sorgula?telefon=${encodeURIComponent(telefon)}`);
    const data = await response.json();
 
    if (response.ok) {
     setKargolar(data.kargolar || []);
     if (!data.kargolar || data.kargolar.length === 0) {
-     setMesaj('Bu ad soyad ile kayıtlı kargo bulunamadı.');
+     setMesaj('Bu telefon numarası ile kayıtlı talep bulunamadı. Lütfen telefon numaranızın tamamını doğru girdiğinizden emin olun.');
     }
    } else {
     setMesaj(data.message || 'Bir hata oluştu. Lütfen tekrar deneyin.');
@@ -36,11 +47,11 @@ export default function KargoTakipPage() {
 
  const getDurumRenk = (durum) => {
   switch (durum) {
-   case 'Hazırlanıyor':
+   case 'Yeni İstek':
     return 'bg-yellow-100 text-yellow-800 border-yellow-300';
-   case 'Kargoya Verildi':
-    return 'bg-blue-100 text-blue-800 border-blue-300';
-   case 'Teslim Edildi':
+   case 'İstek İnceleniyor':
+    return 'bg-purple-100 text-purple-800 border-purple-300';
+   case 'Başarılı İstek':
     return 'bg-green-100 text-green-800 border-green-300';
    default:
     return 'bg-gray-100 text-gray-800 border-gray-300';
@@ -60,6 +71,12 @@ export default function KargoTakipPage() {
   }
  };
 
+ const handleKeyPress = (e) => {
+  if (e.key === 'Enter' && !yukleniyor) {
+   handleSubmit();
+  }
+ };
+
  return (
   <div className="py-16 bg-gray-50 min-h-screen">
    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,33 +84,33 @@ export default function KargoTakipPage() {
 
     <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
      <p className="text-gray-700 mb-6">
-      Ad ve soyad bilginiz ile talebinizi sorgulayabilirsiniz.
+      Telefon numaranızı girerek talebinizi sorgulayabilirsiniz.
      </p>
 
-     <form onSubmit={handleSubmit}>
+     <div>
       <div className="mb-4">
        <label className="block text-gray-700 font-semibold mb-2">
-        Ad Soyad *
+        Telefon Numarası *
        </label>
        <input
-        type="text"
-        value={adSoyad}
-        onChange={(e) => setAdSoyad(e.target.value)}
-        required
+        type="tel"
+        value={telefon}
+        onChange={(e) => setTelefon(e.target.value)}
+        onKeyPress={handleKeyPress}
         disabled={yukleniyor}
         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
-        placeholder="Örn: Ahmet Yılmaz"
+        placeholder="05553332211"
        />
       </div>
 
       <button
-       type="submit"
+       onClick={handleSubmit}
        disabled={yukleniyor}
        className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
        {yukleniyor ? 'Sorgulanıyor...' : 'Sorgula'}
       </button>
-     </form>
+     </div>
     </div>
 
     {mesaj && (
@@ -118,6 +135,9 @@ export default function KargoTakipPage() {
          </div>
 
          <div className="border-t pt-4 space-y-2">
+          <p className="text-gray-700">
+           <span className="font-semibold">Ad Soyad:</span> {kargo.adSoyad}
+          </p>
           <p className="text-gray-700">
            <span className="font-semibold">Adres:</span> {kargo.adres}
           </p>

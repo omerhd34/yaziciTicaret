@@ -4,11 +4,24 @@ import clientPromise from "../../../lib/mongodb";
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
-    const adSoyad = searchParams.get("adSoyad");
+    const telefon = searchParams.get("telefon");
 
-    if (!adSoyad) {
+    if (!telefon) {
       return NextResponse.json(
-        { success: false, message: "Ad Soyad gereklidir" },
+        { success: false, message: "Telefon numarası gereklidir" },
+        { status: 400 }
+      );
+    }
+
+    const temizTelefon = telefon.replace(/[\s\-\(\)]/g, "");
+
+    if (temizTelefon.length < 10) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Lütfen geçerli bir telefon numarası giriniz (en az 10 hane)",
+        },
         { status: 400 }
       );
     }
@@ -16,12 +29,14 @@ export async function GET(request) {
     const client = await clientPromise;
     const db = client.db("yaziciticaret");
 
-    // Ad soyad ile arama (büyük-küçük harf duyarsız)
     const kargolar = await db
       .collection("talepler")
       .find({
-        adSoyad: {
-          $regex: new RegExp(adSoyad, "i"),
+        telefon: {
+          $regex: new RegExp(
+            `^${temizTelefon.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`,
+            "i"
+          ),
         },
       })
       .sort({ olusturmaTarihi: -1 })

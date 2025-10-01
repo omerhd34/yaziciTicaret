@@ -115,7 +115,7 @@ export default function DestekPage() {
       required
       disabled={isSubmitting}
       className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
-      placeholder="0XXX XXX XX XX"
+      placeholder="05553332211"
      />
     </div>
 

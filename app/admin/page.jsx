@@ -149,21 +149,21 @@ export default function AdminPage() {
        <p className="text-3xl font-bold text-blue-800">{talepler.length}</p>
       </div>
       <div className="bg-yellow-100 p-4 rounded-lg">
-       <p className="text-sm text-yellow-600 font-semibold">Hazırlanıyor</p>
+       <p className="text-sm text-yellow-600 font-semibold">Yeni İstek</p>
        <p className="text-3xl font-bold text-yellow-800">
-        {talepler.filter((t) => t.durum === 'Hazırlanıyor').length}
+        {talepler.filter((t) => t.durum === 'Yeni İstek').length}
        </p>
       </div>
-      <div className="bg-red-100 p-4 rounded-lg">
-       <p className="text-sm text-red-600 font-semibold">Kargoya Verildi</p>
-       <p className="text-3xl font-bold text-red-800">
-        {talepler.filter((t) => t.durum === 'Kargoya Verildi').length}
+      <div className="bg-purple-100 p-4 rounded-lg">
+       <p className="text-sm text-purple-600 font-semibold">İstek İnceleniyor</p>
+       <p className="text-3xl font-bold text-purple-800">
+        {talepler.filter((t) => t.durum === 'İstek İnceleniyor').length}
        </p>
       </div>
       <div className="bg-green-100 p-4 rounded-lg">
-       <p className="text-sm text-green-600 font-semibold">Teslim Edildi</p>
+       <p className="text-sm text-green-600 font-semibold">Başarılı İstek</p>
        <p className="text-3xl font-bold text-green-800">
-        {talepler.filter((t) => t.durum === 'Teslim Edildi').length}
+        {talepler.filter((t) => t.durum === 'Başarılı İstek').length}
        </p>
       </div>
      </div>
@@ -187,9 +187,9 @@ export default function AdminPage() {
        <tbody>
         {talepler.map((talep) => {
          let bgColor = 'bg-white';
-         if (talep.durum === 'Hazırlanıyor') bgColor = 'bg-yellow-50';
-         else if (talep.durum === 'Kargoya Verildi') bgColor = 'bg-red-50';
-         else if (talep.durum === 'Teslim Edildi') bgColor = 'bg-green-50';
+         if (talep.durum === 'Yeni İstek') bgColor = 'bg-yellow-50';
+         else if (talep.durum === 'İstek İnceleniyor') bgColor = 'bg-purple-50';
+         else if (talep.durum === 'Başarılı İstek') bgColor = 'bg-green-50';
 
          return (
           <React.Fragment key={talep._id}>
@@ -284,9 +284,9 @@ export default function AdminPage() {
          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
         >
          <option value="">Durum Seçiniz</option>
-         <option value="Hazırlanıyor">Hazırlanıyor</option>
-         <option value="Kargoya Verildi">Kargoya Verildi</option>
-         <option value="Teslim Edildi">Teslim Edildi</option>
+         <option value="Yeni İstek">Yeni İstek</option>
+         <option value="İstek İnceleniyor">İstek İnceleniyor</option>
+         <option value="Başarılı İstek">Başarılı İstek</option>
         </select>
        </div>
        <div className="mb-6">
