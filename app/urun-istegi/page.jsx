@@ -10,10 +10,53 @@ export default function UrunIstegiPage() {
   teslim: ''
  });
  const [mesaj, setMesaj] = useState('');
+ const [isSubmitting, setIsSubmitting] = useState(false);
+
+ const validateForm = () => {
+  if (!formData.adSoyad.trim()) {
+   setMesaj('Lütfen ad ve soyadınızı girin.');
+   return false;
+  }
+  if (!formData.telefon.trim()) {
+   setMesaj('Lütfen telefon numaranızı girin.');
+   return false;
+  }
+  if (formData.telefon.trim().length < 10) {
+   setMesaj('Lütfen geçerli bir telefon numarası girin.');
+   return false;
+  }
+  if (!formData.teslim) {
+   setMesaj('Lütfen istenilen teslim tarihini seçin.');
+   return false;
+  }
+  // Geçmiş tarih kontrolü
+  const selectedDate = new Date(formData.teslim);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  if (selectedDate < today) {
+   setMesaj('Teslim tarihi bugünden önce olamaz.');
+   return false;
+  }
+  if (!formData.adres.trim()) {
+   setMesaj('Lütfen adres bilgisini girin.');
+   return false;
+  }
+  if (formData.adres.trim().length < 10) {
+   setMesaj('Lütfen daha detaylı bir adres girin.');
+   return false;
+  }
+  return true;
+ };
 
  const handleSubmit = async (e) => {
   e.preventDefault();
   setMesaj('');
+
+  if (!validateForm()) {
+   return;
+  }
+
+  setIsSubmitting(true);
 
   try {
    const response = await fetch('/api/urun-talepleri', {
@@ -24,8 +67,10 @@ export default function UrunIstegiPage() {
     body: JSON.stringify(formData),
    });
 
+   const data = await response.json();
+
    if (response.ok) {
-    setMesaj('Ürün talebiniz başarıyla alındı! En kısa sürede sizinle iletişime geçeceğiz.');
+    setMesaj('✓ Ürün talebiniz başarıyla alındı! En kısa sürede sizinle iletişime geçeceğiz.');
     setFormData({
      adSoyad: '',
      telefon: '',
@@ -34,10 +79,13 @@ export default function UrunIstegiPage() {
      teslim: ''
     });
    } else {
-    setMesaj('Bir hata oluştu. Lütfen tekrar deneyin.');
+    setMesaj(data.message || 'Bir hata oluştu. Lütfen tekrar deneyin.');
    }
   } catch (error) {
-   setMesaj('Bir hata oluştu. Lütfen tekrar deneyin.');
+   console.error('Talep gönderme hatası:', error);
+   setMesaj('Sunucuya bağlanılamadı. Lütfen daha sonra tekrar deneyin.');
+  } finally {
+   setIsSubmitting(false);
   }
  };
 
@@ -46,7 +94,11 @@ export default function UrunIstegiPage() {
    ...formData,
    [e.target.name]: e.target.value
   });
+  if (mesaj) setMesaj(''); // Kullanıcı yazmaya başlayınca mesajı temizle
  };
+
+ // Minimum tarih (bugün)
+ const minDate = new Date().toISOString().split('T')[0];
 
  return (
   <div className="py-16 bg-gray-50">
@@ -57,15 +109,20 @@ export default function UrunIstegiPage() {
       Aşağıdaki formu doldurarak ürün talebinde bulunabilirsiniz.
       En kısa sürede sizinle iletişime geçeceğiz.
      </p>
+
      {mesaj && (
-      <div className={`p-4 rounded-lg mb-6 ${mesaj.includes('başarıyla') ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+      <div className={`p-4 rounded-lg mb-6 ${mesaj.includes('✓')
+       ? 'bg-green-100 text-green-800 border border-green-300'
+       : 'bg-red-100 text-red-800 border border-red-300'
+       }`}>
        {mesaj}
       </div>
      )}
+
      <form onSubmit={handleSubmit}>
       <div className="mb-4">
        <label className="block text-gray-700 font-semibold mb-2">
-        Ad Soyad *
+        Ad Soyad <span className="text-red-500">*</span>
        </label>
        <input
         type="text"
@@ -73,13 +130,15 @@ export default function UrunIstegiPage() {
         value={formData.adSoyad}
         onChange={handleChange}
         required
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        disabled={isSubmitting}
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+        placeholder="Adınız ve soyadınız"
        />
       </div>
 
       <div className="mb-4">
        <label className="block text-gray-700 font-semibold mb-2">
-        Telefon *
+        Telefon <span className="text-red-500">*</span>
        </label>
        <input
         type="tel"
@@ -87,13 +146,15 @@ export default function UrunIstegiPage() {
         value={formData.telefon}
         onChange={handleChange}
         required
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        disabled={isSubmitting}
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+        placeholder="0XXX XXX XX XX"
        />
       </div>
 
       <div className="mb-4">
        <label className="block text-gray-700 font-semibold mb-2">
-        İstenilen Teslim Tarihi *
+        İstenilen Teslim Tarihi <span className="text-red-500">*</span>
        </label>
        <input
         type="date"
@@ -101,45 +162,50 @@ export default function UrunIstegiPage() {
         value={formData.teslim}
         onChange={handleChange}
         required
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        disabled={isSubmitting}
+        min={minDate}
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
        />
-
       </div>
-
 
       <div className="mb-4">
        <label className="block text-gray-700 font-semibold mb-2">
-        Adres *
+        Adres <span className="text-red-500">*</span>
        </label>
        <textarea
         name="adres"
         value={formData.adres}
         onChange={handleChange}
         required
+        disabled={isSubmitting}
         rows="3"
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+        placeholder="Teslimat adresinizi detaylı bir şekilde yazın"
        />
       </div>
 
       <div className="mb-6">
        <label className="block text-gray-700 font-semibold mb-2">
-        Açıklama
+        Açıklama <span className="text-red-500">*</span>
        </label>
        <textarea
         name="aciklama"
         value={formData.aciklama}
         onChange={handleChange}
+        required
+        disabled={isSubmitting}
         rows="4"
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        placeholder="Ürün hakkında ek bilgiler..."
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+        placeholder="İstediğiniz ürün hakkında ek bilgiler yazabilirsiniz..."
        />
       </div>
 
       <button
        type="submit"
-       className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+       disabled={isSubmitting}
+       className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
-       Talep Gönder
+       {isSubmitting ? 'Gönderiliyor...' : 'Talep Gönder'}
       </button>
      </form>
     </div>

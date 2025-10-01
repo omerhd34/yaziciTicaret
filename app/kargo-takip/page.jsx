@@ -6,39 +6,57 @@ export default function KargoTakipPage() {
  const [kargolar, setKargolar] = useState([]);
  const [mesaj, setMesaj] = useState('');
  const [arandiMi, setArandiMi] = useState(false);
+ const [yukleniyor, setYukleniyor] = useState(false);
 
  const handleSubmit = async (e) => {
   e.preventDefault();
   setMesaj('');
   setArandiMi(true);
+  setYukleniyor(true);
 
   try {
    const response = await fetch(`/api/kargo-sorgula?adSoyad=${encodeURIComponent(adSoyad)}`);
    const data = await response.json();
 
    if (response.ok) {
-    setKargolar(data.kargolar);
-    if (data.kargolar.length === 0) {
+    setKargolar(data.kargolar || []);
+    if (!data.kargolar || data.kargolar.length === 0) {
      setMesaj('Bu ad soyad ile kayıtlı kargo bulunamadı.');
     }
    } else {
-    setMesaj('Bir hata oluştu. Lütfen tekrar deneyin.');
+    setMesaj(data.message || 'Bir hata oluştu. Lütfen tekrar deneyin.');
    }
   } catch (error) {
+   console.error('Sorgulama hatası:', error);
    setMesaj('Bir hata oluştu. Lütfen tekrar deneyin.');
+  } finally {
+   setYukleniyor(false);
   }
  };
 
  const getDurumRenk = (durum) => {
   switch (durum) {
    case 'Hazırlanıyor':
-    return 'bg-yellow-100 text-yellow-800';
+    return 'bg-yellow-100 text-yellow-800 border-yellow-300';
    case 'Kargoya Verildi':
-    return 'bg-blue-100 text-blue-800';
+    return 'bg-blue-100 text-blue-800 border-blue-300';
    case 'Teslim Edildi':
-    return 'bg-green-100 text-green-800';
+    return 'bg-green-100 text-green-800 border-green-300';
    default:
-    return 'bg-gray-100 text-gray-800';
+    return 'bg-gray-100 text-gray-800 border-gray-300';
+  }
+ };
+
+ const formatTarih = (tarihStr) => {
+  if (!tarihStr) return '-';
+  try {
+   const tarih = new Date(tarihStr);
+   if (isNaN(tarih.getTime())) {
+    return tarihStr;
+   }
+   return tarih.toLocaleDateString('tr-TR');
+  } catch (error) {
+   return tarihStr;
   }
  };
 
@@ -49,74 +67,73 @@ export default function KargoTakipPage() {
 
     <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
      <p className="text-gray-700 mb-6">
-      Ad ve soyad bilginiz ile kargonuzu sorgulayabilirsiniz.
+      Ad ve soyad bilginiz ile talebinizi sorgulayabilirsiniz.
      </p>
 
      <form onSubmit={handleSubmit}>
       <div className="mb-4">
        <label className="block text-gray-700 font-semibold mb-2">
-        Ad Soyad
+        Ad Soyad *
        </label>
        <input
         type="text"
         value={adSoyad}
         onChange={(e) => setAdSoyad(e.target.value)}
         required
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        disabled={yukleniyor}
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
         placeholder="Örn: Ahmet Yılmaz"
        />
       </div>
 
       <button
        type="submit"
-       className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+       disabled={yukleniyor}
+       className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
-       Kargo Sorgula
+       {yukleniyor ? 'Sorgulanıyor...' : 'Sorgula'}
       </button>
      </form>
     </div>
 
     {mesaj && (
-     <div className="bg-yellow-100 text-yellow-800 p-4 rounded-lg mb-6">
+     <div className="bg-yellow-100 border border-yellow-400 text-yellow-800 p-4 rounded-lg mb-6">
       {mesaj}
      </div>
     )}
 
     {arandiMi && kargolar.length > 0 && (
      <div>
-      <h2 className="text-2xl font-bold mb-4">Kargolarınız</h2>
+      <h2 className="text-2xl font-bold mb-4">Talepleriniz</h2>
       <div className="space-y-4">
        {kargolar.map((kargo) => (
-        <div key={kargo._id} className="bg-white rounded-lg shadow-lg p-6">
+        <div key={kargo._id} className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
          <div className="flex justify-between items-start mb-4">
-          <span className={`px-4 py-2 rounded-full font-semibold ${getDurumRenk(kargo.durum)}`}>
+          <span className={`px-4 py-2 rounded-full font-semibold border ${getDurumRenk(kargo.durum)}`}>
            {kargo.durum}
+          </span>
+          <span className="text-sm text-gray-500">
+           Talep: {formatTarih(kargo.olusturmaTarihi)}
           </span>
          </div>
 
-         <div className="border-t pt-4">
-          <p className="text-gray-700 mb-2">
+         <div className="border-t pt-4 space-y-2">
+          <p className="text-gray-700">
            <span className="font-semibold">Adres:</span> {kargo.adres}
           </p>
-          <p className="text-gray-700 mb-2">
+          <p className="text-gray-700">
            <span className="font-semibold">Telefon:</span> {kargo.telefon}
           </p>
-          <p className="text-gray-700 mb-2">
-           <span className="font-semibold">İstenilen Teslim Tarihi:</span> {kargo.teslim}
-          </p>
           {kargo.teslim && (
-           <p className="text-gray-700 mb-2">
-            <span className="font-semibold">Tahmini Teslimat:</span> {new Date(kargo.teslim).toLocaleDateString('tr-TR')}
+           <p className="text-gray-700">
+            <span className="font-semibold">İstenilen Teslim Tarihi:</span> {kargo.teslim}
            </p>
           )}
           {kargo.aciklama && (
-           <p className="text-gray-700 mb-2">
+           <p className="text-gray-700">
             <span className="font-semibold">Açıklama:</span> {kargo.aciklama}
            </p>
           )}
-          <p className="text-gray-500 text-sm mt-4">
-           Talep Tarihi: {new Date(kargo.olusturmaTarihi).toLocaleDateString('tr-TR')}
-          </p>
          </div>
         </div>
        ))}

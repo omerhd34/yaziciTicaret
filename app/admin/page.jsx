@@ -23,14 +23,14 @@ export default function AdminPage() {
 
   talepleriGetir();
   destekMesajlariniGetir();
- }, []);
+ }, [router]);
 
  const talepleriGetir = async () => {
   try {
    const response = await fetch('/api/urun-talepleri');
    if (response.ok) {
     const data = await response.json();
-    setTalepler(data.talepler);
+    setTalepler(data.talepler || []);
    }
   } catch (error) {
    console.error('Talepler getirilirken hata:', error);
@@ -40,6 +40,11 @@ export default function AdminPage() {
  };
 
  const talepGuncelle = async (id) => {
+  if (!durum) {
+   alert('Lütfen durum seçiniz');
+   return;
+  }
+
   try {
    const response = await fetch('/api/kargolar', {
     method: 'PUT',
@@ -53,8 +58,11 @@ export default function AdminPage() {
     setDurum('');
     setTeslim('');
     talepleriGetir();
+   } else {
+    alert('Güncelleme başarısız oldu');
    }
   } catch (error) {
+   console.error('Güncelleme hatası:', error);
    alert('Bir hata oluştu');
   }
  };
@@ -72,8 +80,11 @@ export default function AdminPage() {
    if (response.ok) {
     alert('Talep silindi');
     talepleriGetir();
+   } else {
+    alert('Silme işlemi başarısız oldu');
    }
   } catch (error) {
+   console.error('Silme hatası:', error);
    alert('Bir hata oluştu');
   }
  };
@@ -83,7 +94,7 @@ export default function AdminPage() {
    const res = await fetch('/api/destek');
    if (res.ok) {
     const data = await res.json();
-    setDestekMesajlari(data.mesajlar);
+    setDestekMesajlari(data.mesajlar || []);
    }
   } catch (err) {
    console.error("Destek mesajları alınamadı:", err);
@@ -102,9 +113,12 @@ export default function AdminPage() {
 
    if (response.ok) {
     alert('Mesaj silindi');
-    destekMesajlariniGetir(); // Listeyi tekrar getir
+    destekMesajlariniGetir();
+   } else {
+    alert('Silme işlemi başarısız oldu');
    }
   } catch (error) {
+   console.error('Silme hatası:', error);
    alert('Bir hata oluştu');
   }
  };
@@ -125,16 +139,7 @@ export default function AdminPage() {
  return (
   <div className="py-8 bg-gray-50 min-h-screen">
    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex justify-between items-center mb-8">
-     <h1 className="text-4xl font-bold">Admin Paneli</h1>
-     <button
-      onClick={cikisYap}
-      className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700"
-     >
-      Çıkış Yap
-     </button>
-    </div>
-
+    <h1 className="text-4xl font-bold mb-8">Admin Paneli</h1>
     {/* İstatistikler */}
     <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
      <h2 className="text-2xl font-bold mb-4">İstatistikler</h2>
@@ -174,7 +179,7 @@ export default function AdminPage() {
          <th className="px-4 py-3 text-left">Ad Soyad</th>
          <th className="px-4 py-3 text-left">Telefon</th>
          <th className="px-4 py-3 text-left">İstenilen Teslim Tarihi</th>
-         <th className="px-4 py-3 text-left">Tarih ve Saat</th>
+         <th className="px-4 py-3 text-left">Talep Tarihi</th>
          <th className="px-4 py-3 text-left cursor-pointer">Açıklama</th>
          <th className="px-4 py-3 text-left">İşlemler</th>
         </tr>
@@ -182,16 +187,16 @@ export default function AdminPage() {
        <tbody>
         {talepler.map((talep) => {
          let bgColor = 'bg-white';
-         if (talep.durum === 'Hazırlanıyor') bgColor = 'bg-yellow-100';
-         else if (talep.durum === 'Kargoya Verildi') bgColor = 'bg-red-100';
-         else if (talep.durum === 'Teslim Edildi') bgColor = 'bg-green-100';
+         if (talep.durum === 'Hazırlanıyor') bgColor = 'bg-yellow-50';
+         else if (talep.durum === 'Kargoya Verildi') bgColor = 'bg-red-50';
+         else if (talep.durum === 'Teslim Edildi') bgColor = 'bg-green-50';
 
          return (
           <React.Fragment key={talep._id}>
-           <tr className={`${bgColor} border-b hover:bg-gray-300 transition-colors duration-300`}>
+           <tr className={`${bgColor} border-b hover:bg-gray-100 transition-colors duration-200`}>
             <td className="px-4 py-3">{talep.adSoyad}</td>
             <td className="px-4 py-3">{talep.telefon}</td>
-            <td className="px-4 py-3">{talep.teslim}</td>
+            <td className="px-4 py-3">{talep.teslim || '-'}</td>
             <td className="px-4 py-3">
              {new Date(talep.olusturmaTarihi).toLocaleString('tr-TR', {
               day: '2-digit',
@@ -199,7 +204,6 @@ export default function AdminPage() {
               year: 'numeric',
               hour: '2-digit',
               minute: '2-digit',
-              second: '2-digit',
              })}
             </td>
             <td
@@ -217,13 +221,13 @@ export default function AdminPage() {
                setDurum(talep.durum);
                setTeslim(talep.teslim || '');
               }}
-              className="bg-blue-600 text-white px-3 py-1 rounded mr-2 hover:bg-blue-700"
+              className="bg-blue-600 text-white px-3 py-1 rounded mr-2 hover:bg-blue-700 transition-colors"
              >
               Düzenle
              </button>
              <button
               onClick={() => talepSil(talep._id)}
-              className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+              className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition-colors"
              >
               Sil
              </button>
@@ -232,13 +236,20 @@ export default function AdminPage() {
            {aciklamaGosterilenId === talep._id && talep.aciklama && (
             <tr className="bg-gray-50">
              <td colSpan={6} className="px-4 py-3 text-gray-700 whitespace-pre-wrap">
-              {talep.aciklama}
+              <strong>Açıklama:</strong> {talep.aciklama}
              </td>
             </tr>
            )}
           </React.Fragment>
          );
         })}
+        {talepler.length === 0 && (
+         <tr>
+          <td colSpan={6} className="px-4 py-8 text-center text-gray-500">
+           Henüz talep bulunmamaktadır.
+          </td>
+         </tr>
+        )}
        </tbody>
       </table>
      </div>
@@ -246,10 +257,10 @@ export default function AdminPage() {
 
     {/* Talep Düzenleme Modal */}
     {seciliTalep && (
-     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
       <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-screen overflow-y-auto">
        <h3 className="text-2xl font-bold mb-4">Talep Düzenle</h3>
-       <div className="mb-4">
+       <div className="mb-4 space-y-2">
         <p>
          <span className="font-semibold">Ad Soyad:</span> {seciliTalep.adSoyad}
         </p>
@@ -266,30 +277,31 @@ export default function AdminPage() {
         )}
        </div>
        <div className="mb-4">
-        <label className="block text-gray-700 font-semibold mb-2">Durum</label>
+        <label className="block text-gray-700 font-semibold mb-2">Durum *</label>
         <select
          value={durum}
          onChange={(e) => setDurum(e.target.value)}
-         className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
         >
+         <option value="">Durum Seçiniz</option>
          <option value="Hazırlanıyor">Hazırlanıyor</option>
          <option value="Kargoya Verildi">Kargoya Verildi</option>
          <option value="Teslim Edildi">Teslim Edildi</option>
         </select>
        </div>
        <div className="mb-6">
-        <label className="block text-gray-700 font-semibold mb-2">Tahmini Teslimat Tarihi</label>
+        <label className="block text-gray-700 font-semibold mb-2">İstenilen Teslim Tarihi</label>
         <input
          type="date"
          value={teslim}
          onChange={(e) => setTeslim(e.target.value)}
-         className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
         />
        </div>
        <div className="flex gap-4">
         <button
          onClick={() => talepGuncelle(seciliTalep._id)}
-         className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+         className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
         >
          Kaydet
         </button>
@@ -299,7 +311,7 @@ export default function AdminPage() {
           setDurum('');
           setTeslim('');
          }}
-         className="flex-1 bg-gray-600 text-white py-2 rounded-lg hover:bg-gray-700"
+         className="flex-1 bg-gray-600 text-white py-2 rounded-lg hover:bg-gray-700 transition-colors"
         >
          İptal
         </button>
@@ -318,18 +330,27 @@ export default function AdminPage() {
          <th className="px-4 py-3 text-left">İsim</th>
          <th className="px-4 py-3 text-left">Telefon</th>
          <th className="px-4 py-3 text-left">Konu</th>
-         <th className="px-4 py-3 text-left">Mesaj</th>
          <th className="px-4 py-3 text-left">Tarih</th>
+         <th className="px-4 py-3 text-left">Mesaj</th>
          <th className="px-4 py-3 text-left">İşlemler</th>
         </tr>
        </thead>
        <tbody>
         {destekMesajlari.map((mesaj, index) => (
          <React.Fragment key={mesaj._id || index}>
-          <tr className="border-b hover:bg-gray-50">
+          <tr className="border-b hover:bg-gray-50 transition-colors">
            <td className="px-4 py-3">{mesaj.name}</td>
-           <td className="px-4 py-3">{mesaj.telefon || '-'}</td>
+           <td className="px-4 py-3">{mesaj.phone || '-'}</td>
            <td className="px-4 py-3">{mesaj.subject}</td>
+           <td className="px-4 py-3">
+            {new Date(mesaj.createdAt).toLocaleString('tr-TR', {
+             day: '2-digit',
+             month: '2-digit',
+             year: 'numeric',
+             hour: '2-digit',
+             minute: '2-digit',
+            })}
+           </td>
            <td
             className="px-4 py-3 text-blue-600 cursor-pointer"
             onClick={() =>
@@ -340,11 +361,11 @@ export default function AdminPage() {
            >
             <AiOutlineInfoCircle className="h-5 w-5" />
            </td>
-           <td className="px-4 py-3">{new Date(mesaj.createdAt).toLocaleString('tr-TR')}</td>
+
            <td className="px-4 py-3">
             <button
              onClick={() => destekMesajSil(mesaj._id)}
-             className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+             className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition-colors"
             >
              Sil
             </button>
@@ -353,12 +374,19 @@ export default function AdminPage() {
           {mesajGosterilenId === (mesaj._id || index) && (
            <tr className="bg-gray-50">
             <td colSpan={6} className="px-4 py-3 text-gray-700 whitespace-pre-wrap">
-             {mesaj.message}
+             <strong>Mesaj:</strong> {mesaj.message}
             </td>
            </tr>
           )}
          </React.Fragment>
         ))}
+        {destekMesajlari.length === 0 && (
+         <tr>
+          <td colSpan={6} className="px-4 py-8 text-center text-gray-500">
+           Henüz destek mesajı bulunmamaktadır.
+          </td>
+         </tr>
+        )}
        </tbody>
       </table>
      </div>

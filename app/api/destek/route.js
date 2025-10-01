@@ -5,18 +5,44 @@ import { ObjectId } from "mongodb";
 export async function POST(req) {
   try {
     const data = await req.json();
+
+    if (!data.name || !data.phone || !data.subject || !data.message) {
+      return NextResponse.json(
+        { message: "Lütfen tüm zorunlu alanları doldurun" },
+        { status: 400 }
+      );
+    }
+
+    if (data.message.length < 10) {
+      return NextResponse.json(
+        { message: "Mesaj en az 10 karakter olmalıdır" },
+        { status: 400 }
+      );
+    }
+
     const client = await clientPromise;
     const db = client.db("yaziciticaret");
 
-    await db.collection("destekMesajlari").insertOne({
-      ...data,
+    const yeniMesaj = {
+      name: data.name.trim(),
+      phone: data.phone.trim(),
+      subject: data.subject.trim(),
+      message: data.message.trim(),
       createdAt: new Date(),
-    });
+    };
 
-    return NextResponse.json({ message: "Mesaj alındı." }, { status: 200 });
+    await db.collection("destekMesajlari").insertOne(yeniMesaj);
+
+    return NextResponse.json(
+      { message: "Mesajınız alındı. En kısa sürede dönüş yapacağız." },
+      { status: 200 }
+    );
   } catch (err) {
-    console.error(err);
-    return NextResponse.json({ message: "Bir hata oluştu." }, { status: 500 });
+    console.error("Destek mesajı kaydetme hatası:", err);
+    return NextResponse.json(
+      { message: "Bir hata oluştu. Lütfen daha sonra tekrar deneyin." },
+      { status: 500 }
+    );
   }
 }
 
@@ -33,8 +59,11 @@ export async function GET() {
 
     return NextResponse.json({ mesajlar }, { status: 200 });
   } catch (err) {
-    console.error(err);
-    return NextResponse.json({ message: "Bir hata oluştu." }, { status: 500 });
+    console.error("Destek mesajları getirme hatası:", err);
+    return NextResponse.json(
+      { message: "Bir hata oluştu.", mesajlar: [] },
+      { status: 500 }
+    );
   }
 }
 
@@ -42,6 +71,13 @@ export async function DELETE(req) {
   try {
     const body = await req.json();
     const id = body.id;
+
+    if (!id) {
+      return NextResponse.json(
+        { message: "Mesaj ID gereklidir." },
+        { status: 400 }
+      );
+    }
 
     const client = await clientPromise;
     const db = client.db("yaziciticaret");
@@ -57,9 +93,15 @@ export async function DELETE(req) {
       );
     }
 
-    return NextResponse.json({ message: "Mesaj silindi." }, { status: 200 });
+    return NextResponse.json(
+      { message: "Mesaj başarıyla silindi." },
+      { status: 200 }
+    );
   } catch (err) {
-    console.error(err);
-    return NextResponse.json({ message: "Silme hatası." }, { status: 500 });
+    console.error("Mesaj silme hatası:", err);
+    return NextResponse.json(
+      { message: "Silme işlemi başarısız oldu." },
+      { status: 500 }
+    );
   }
 }
