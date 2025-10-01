@@ -9,6 +9,7 @@ export default function AdminPage() {
  const [seciliTalep, setSeciliTalep] = useState(null);
  const [durum, setDurum] = useState('');
  const [teslim, setTeslim] = useState('');
+ const [adminCevap, setAdminCevap] = useState('');
  const [aciklamaGosterilenId, setAciklamaGosterilenId] = useState(null);
  const [destekMesajlari, setDestekMesajlari] = useState([]);
  const [mesajGosterilenId, setMesajGosterilenId] = useState(null);
@@ -49,7 +50,7 @@ export default function AdminPage() {
    const response = await fetch('/api/kargolar', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id, durum, teslim }),
+    body: JSON.stringify({ id, durum, teslim, adminCevap }),
    });
 
    if (response.ok) {
@@ -57,6 +58,7 @@ export default function AdminPage() {
     setSeciliTalep(null);
     setDurum('');
     setTeslim('');
+    setAdminCevap('');
     talepleriGetir();
    } else {
     alert('Güncelleme başarısız oldu');
@@ -140,6 +142,7 @@ export default function AdminPage() {
   <div className="py-8 bg-gray-50 min-h-screen">
    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h1 className="text-4xl font-bold mb-8">Admin Paneli</h1>
+
     {/* İstatistikler */}
     <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
      <h2 className="text-2xl font-bold mb-4">İstatistikler</h2>
@@ -220,6 +223,7 @@ export default function AdminPage() {
                setSeciliTalep(talep);
                setDurum(talep.durum);
                setTeslim(talep.teslim || '');
+               setAdminCevap(talep.adminCevap || '');
               }}
               className="bg-blue-600 text-white px-3 py-1 rounded mr-2 hover:bg-blue-700 transition-colors"
              >
@@ -236,7 +240,7 @@ export default function AdminPage() {
            {aciklamaGosterilenId === talep._id && talep.aciklama && (
             <tr className="bg-gray-50">
              <td colSpan={6} className="px-4 py-3 text-gray-700 whitespace-pre-wrap">
-              <strong>Açıklama:</strong> {talep.aciklama}
+              <strong>Müşteri Açıklaması:</strong> {talep.aciklama}
              </td>
             </tr>
            )}
@@ -272,7 +276,7 @@ export default function AdminPage() {
         </p>
         {seciliTalep.aciklama && (
          <p>
-          <span className="font-semibold">Açıklama:</span> {seciliTalep.aciklama}
+          <span className="font-semibold">Müşteri Açıklaması:</span> {seciliTalep.aciklama}
          </p>
         )}
        </div>
@@ -289,13 +293,28 @@ export default function AdminPage() {
          <option value="Başarılı İstek">Başarılı İstek</option>
         </select>
        </div>
-       <div className="mb-6">
+       <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">İstenilen Teslim Tarihi</label>
         <input
          type="date"
          value={teslim}
          onChange={(e) => setTeslim(e.target.value)}
          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+        />
+       </div>
+       <div className="mb-6">
+        <label className="block text-gray-700 font-semibold mb-2">
+         Müşteriye Açıklama
+         <span className="text-sm font-normal text-gray-500 ml-2">
+          (Başarılı istek durumunda müşteri bu mesajı görecektir)
+         </span>
+        </label>
+        <textarea
+         value={adminCevap}
+         onChange={(e) => setAdminCevap(e.target.value)}
+         rows={4}
+         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+         placeholder="Müşteriye iletmek istediğiniz açıklamayı yazın..."
         />
        </div>
        <div className="flex gap-4">
@@ -310,6 +329,7 @@ export default function AdminPage() {
           setSeciliTalep(null);
           setDurum('');
           setTeslim('');
+          setAdminCevap('');
          }}
          className="flex-1 bg-gray-600 text-white py-2 rounded-lg hover:bg-gray-700 transition-colors"
         >

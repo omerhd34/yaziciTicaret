@@ -154,6 +154,19 @@ export default function KargoTakipPage() {
             <span className="font-semibold">Açıklama:</span> {kargo.aciklama}
            </p>
           )}
+
+          {/* Admin Cevabı - Sadece Başarılı İstek durumunda göster */}
+          {kargo.durum === 'Başarılı İstek' && kargo.adminCevap && (
+           <div className="mt-4 bg-green-50 border-l-4 border-green-500 p-4 rounded">
+            <p className="text-green-900 font-semibold mb-1 flex items-center">
+             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+             </svg>
+             Talebiniz Hakkında:
+            </p>
+            <p className="text-green-800 whitespace-pre-wrap">{kargo.adminCevap}</p>
+           </div>
+          )}
          </div>
         </div>
        ))}

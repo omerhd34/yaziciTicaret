@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 
 export async function PUT(request) {
   try {
-    const { id, durum, teslim } = await request.json();
+    const { id, durum, teslim, adminCevap } = await request.json();
     const client = await clientPromise;
     const db = client.db("yaziciticaret");
 
@@ -14,6 +14,10 @@ export async function PUT(request) {
 
     if (teslim) {
       guncellemeler.teslim = teslim;
+    }
+
+    if (adminCevap !== undefined) {
+      guncellemeler.adminCevap = adminCevap;
     }
 
     const result = await db
