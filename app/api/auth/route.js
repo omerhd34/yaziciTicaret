@@ -11,8 +11,8 @@ export async function POST(request) {
       );
     }
 
-    const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "yaziciticaret";
-    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "123456";
+    const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
     if (kullaniciAdi === ADMIN_USERNAME && sifre === ADMIN_PASSWORD) {
       const token = Buffer.from(`${kullaniciAdi}:${Date.now()}`).toString(

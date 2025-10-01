@@ -33,16 +33,21 @@ export default function IletisimPage() {
         <div className="text-2xl mr-4 text-blue-600">
          <FaPhone />
         </div>
-        <div className="flex items-center space-x-2">
-         <p className="font-semibold">Telefon:</p>
-         <p className="text-gray-700">0544 796 77 70</p>
+        <div className="flex items-center space-x-3">
+         <span className="font-semibold">Telefon:</span>
+         <span
+          href="tel:905078492903"
+          className="px-3 py-1 bg-gray-100 rounded-lg text-gray-800 font-medium shadow-sm hover:bg-gray-200 transition-colors"
+         >
+          0544 796 77 70
+         </span>
          <Link
           href="https://wa.me/905447967770"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-green-500 text-2xl hover:scale-110 transition-transform duration-700"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white hover:bg-green-600 transition-all duration-500 shadow-md hover:scale-110"
          >
-          <FaWhatsapp />
+          <FaWhatsapp className="text-xl" />
          </Link>
         </div>
        </div>
@@ -80,19 +85,22 @@ export default function IletisimPage() {
         <div className="text-2xl mr-4 text-blue-600">
          <FaPhone />
         </div>
-        <div className="flex items-center space-x-2">
-         <p className="font-semibold">Telefon:</p>
-         <p className="text-gray-700">0501 349 69 91</p>
+        <div className="flex items-center space-x-3">
+         <span className="font-semibold">Telefon:</span>
+         <span className="px-3 py-1 bg-gray-100 rounded-lg text-gray-800 font-medium shadow-sm">
+          0501 349 69 91
+         </span>
          <Link
           href="https://wa.me/905013496991"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-green-500 text-2xl hover:scale-110 transition-transform duration-700"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white hover:bg-green-600 transition-all duration-500 shadow-md hover:scale-110"
          >
-          <FaWhatsapp />
+          <FaWhatsapp className="text-xl" />
          </Link>
         </div>
        </div>
+
       </div>
 
       <div className="mt-6 overflow-hidden rounded-lg shadow-md border-2 border-gray-100 hover:shadow-xl transition-shadow duration-700">
