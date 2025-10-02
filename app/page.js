@@ -1,6 +1,6 @@
-import HeroSection from "../components/HeroSection";
-import GaleriSection from "../components/GaleriSection";
-import NedenYaziciTicaret from "../components/NedenYaziciTicaret";
+import GaleriSection from "@/components/GaleriSection";
+import HeroSection from "@/components/HeroSection";
+import NedenYaziciTicaret from "@/components/NedenYaziciTicaret";
 
 export default function Home() {
   return (

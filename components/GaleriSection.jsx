@@ -1,47 +1,45 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 export default function GaleriSection() {
  const [currentIndex, setCurrentIndex] = useState(0);
- const [isAutoPlay, setIsAutoPlay] = useState(true);
 
  const images = [
-  { id: 1, url: './tv.png', alt: 'Televizyon', baslik: 'Akıllı Televizyonlar', padding: 'p-20' },
-  { id: 2, url: './beyazesya.png', alt: 'Beyaz Eşya', baslik: 'Beyaz Eşya Ürünleri', padding: '' },
-  { id: 3, url: './ankastre.png', alt: 'Ankastre', baslik: 'Ankastre Set', padding: 'p-15' },
-  { id: 4, url: './supurge.png', alt: 'Elektrikli Süpürge', baslik: 'Elektrikli Süpürgeler', padding: 'p-12' },
-  { id: 5, url: './susebili.png', alt: 'Su Sebili', baslik: 'Su Sebilleri', padding: 'p-12' },
-  { id: 6, url: './suaritma.png', alt: 'Su Arıtma', baslik: 'Su Arıtma Cihazları', padding: 'p-20' },
+  { id: 1, url: './tv.png', alt: 'Televizyon', baslik: 'Akıllı Televizyonlar' },
+  { id: 2, url: './supurge.png', alt: 'Elektrikli Süpürge', baslik: 'Elektrikli Süpürge' },
+  { id: 3, url: './bulasık.png', alt: 'Bulaşık Makinesi', baslik: 'Bulaşık Makinesi' },
+  { id: 4, url: './camasır.png', alt: 'Çamaşır Makinesi', baslik: 'Çamaşır Makinesi' },
+  { id: 5, url: './kurutma.png', alt: 'Kurutma Makinesi', baslik: 'Kurutma Makinesi' },
+  { id: 6, url: './ocak.png', alt: 'Ocak', baslik: 'Ocak' },
+  { id: 7, url: './fırın.png', alt: 'Fırın', baslik: 'Fırın' },
+  { id: 8, url: './mikrodalga.png', alt: 'Mikrodalga', baslik: 'Mikrodalga' },
+  { id: 9, url: './ankastre.png', alt: 'Ankastre', baslik: 'Ankastre Set' },
+  { id: 10, url: './klima.png', alt: 'Klima', baslik: 'Klima' },
+  { id: 11, url: './suaritma.png', alt: 'Su Arıtma', baslik: 'Su Arıtma Cihazı' },
+  { id: 12, url: './susebili.png', alt: 'Su Sebili', baslik: 'Su Sebili' },
  ];
 
- useEffect(() => {
-  if (!isAutoPlay) return;
-
-  const interval = setInterval(() => {
-   setCurrentIndex((prev) => (prev + 1) % images.length);
-  }, 4000);
-
-  return () => clearInterval(interval);
- }, [isAutoPlay, images.length]);
-
- const goToSlide = (index) => {
-  setCurrentIndex(index);
-  setIsAutoPlay(false);
- };
-
  const nextSlide = () => {
-  setCurrentIndex((prev) => (prev + 1) % images.length);
-  setIsAutoPlay(false);
+  setCurrentIndex((prev) =>
+   prev + 3 < images.length ? prev + 3 : 0
+  );
  };
 
  const prevSlide = () => {
-  setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  setIsAutoPlay(false);
+  setCurrentIndex((prev) =>
+   prev - 3 >= 0 ? prev - 3 : images.length - (images.length % 3 || 3)
+  );
+ };
+
+ const goToSlide = (index) => {
+  setCurrentIndex(index);
  };
 
  return (
   <section className="py-16 bg-gradient-to-b from-white to-gray-50">
    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Başlık */}
     <div className="text-center mb-5 sm:mb-12">
      <h2 className="font-bold text-gray-900 mb-4 text-2xl sm:text-5xl">
       Ürünlerimiz
@@ -51,93 +49,64 @@ export default function GaleriSection() {
      </p>
     </div>
 
+    {/* Kartlı Slider */}
     <div className="relative">
-     <div className="relative h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-b from-gray-800 to-gray-900">
-      {images.map((image, index) => (
-       <div
-        key={image.id}
-        className={`absolute w-full h-full transition-all duration-700 ease-in-out ${index === currentIndex
-         ? 'opacity-100 translate-x-0'
-         : index < currentIndex
-          ? 'opacity-0 -translate-x-full'
-          : 'opacity-0 translate-x-full'
-         }`}
-       >
-        <div className={`w-full h-full flex items-center justify-center ${image.padding} pb-36`}>
-         <img
-          src={image.url}
-          alt={image.alt}
-          className="w-full h-full object-contain drop-shadow-2xl"
-         />
+     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {images
+       .slice(currentIndex, currentIndex + 3)
+       .map((image) => (
+        <div
+         key={image.id}
+         className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-500"
+        >
+         <div className="w-full h-40 md:h-48 lg:h-56 overflow-hidden">
+          <img
+           src={image.url}
+           alt={image.alt}
+           className="w-full h-full object-contain"
+          />
+         </div>
+         <div className="p-4">
+          <h3 className="text-base md:text-lg font-bold text-gray-900 mb-1">
+           {image.baslik}
+          </h3>
+          <p className="text-gray-600 text-sm">
+           Kaliteli ve uygun fiyatlı {image.alt.toLowerCase()} ürünleri
+          </p>
+         </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none"></div>
-
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white bg-gradient-to-t from-black/95 to-transparent">
-         <h3 className="text-[18px] md:text-4xl font-bold mb-2">
-          {image.baslik}
-         </h3>
-         <p className="text-[15px] md:text-lg text-gray-200">
-          Kaliteli ve uygun fiyatlı {image.alt.toLowerCase()} ürünleri
-         </p>
-        </div>
-       </div>
-      ))}
+       ))}
      </div>
 
-     <button
-      onClick={prevSlide}
-      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-2 sm:p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
-      aria-label="Önceki"
-     >
-      <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-      </svg>
-     </button>
-
-     <button
-      onClick={nextSlide}
-      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-2 sm:p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
-      aria-label="Sonraki"
-     >
-      <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-      </svg>
-     </button>
-
-     <div className="flex justify-center gap-3 mt-6">
-      {images.map((_, index) => (
+     {/* Pagination */}
+     <div className="flex justify-center items-center gap-3 mt-8">
+      <button
+       onClick={prevSlide}
+       className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 shadow-md transition transform hover:scale-110"
+      >
+       <FiChevronLeft className="w-6 h-6" />
+      </button>
+      {Array.from({ length: Math.ceil(images.length / 3) }).map((_, index) => (
        <button
         key={index}
-        onClick={() => goToSlide(index)}
-        className={`transition-all duration-300 rounded-full ${index === currentIndex
-         ? 'w-12 h-3 bg-blue-600'
-         : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
-         }`}
-        aria-label={`Slayt ${index + 1}`}
-       />
+        onClick={() => goToSlide(index * 3)}
+        className={`w-8 h-8 flex items-center justify-center rounded-md border font-medium
+                  ${currentIndex === index * 3
+          ? 'bg-blue-600 text-white border-blue-600'
+          : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+         }
+                `}
+       >
+        {index + 1}
+       </button>
       ))}
-     </div>
-    </div>
-
-    <div className="hidden md:grid grid-cols-3 sm:grid-cols-6 gap-4 mt-8">
-     {images.map((image, index) => (
       <button
-       key={image.id}
-       onClick={() => goToSlide(index)}
-       className={`relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-gray-100 ${index === currentIndex ? 'ring-4 ring-blue-600 scale-105' : 'hover:scale-105'
-        }`}
+       onClick={nextSlide}
+       className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 shadow-md transition transform hover:scale-110"
       >
-       <div className="w-full h-28 flex items-center justify-center p-4">
-        <img
-         src={image.url}
-         alt={image.alt}
-         className="max-w-[85%] max-h-[85%] object-contain"
-        />
-       </div>
-       <div className={`absolute inset-0 ${index === currentIndex ? 'bg-blue-600/20' : 'bg-black/0 hover:bg-black/10'
-        } transition-all duration-300`}></div>
+       <FiChevronRight className="w-6 h-6" />
       </button>
-     ))}
+     </div>
     </div>
    </div>
   </section>

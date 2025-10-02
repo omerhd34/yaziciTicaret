@@ -5,6 +5,7 @@ import AdminStats from '@/components/Admin/AdminStats';
 import TaleplerSection from '@/components/Admin/TaleplerSection';
 import TalepDuzenleModal from '@/components/Admin/TalepDuzenleModal';
 import DestekMesajlariSection from '@/components/Admin/DestekMesajlariSection';
+import Logo from '@/components/Logo';
 
 export default function AdminPage() {
  const [talepler, setTalepler] = useState([]);
@@ -117,8 +118,10 @@ export default function AdminPage() {
 
  if (yukleniyor) {
   return (
-   <div className="flex justify-center items-center min-h-screen">
-    <div className="text-xl">Yükleniyor...</div>
+   <div className="flex bg-black justify-center items-center min-h-screen">
+    <div>
+     <Logo />
+    </div>
    </div>
   );
  }

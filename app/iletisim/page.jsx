@@ -35,7 +35,7 @@ export default function IletisimPage() {
         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
          <span className="font-semibold">Telefon:</span>
          <div className="flex items-center gap-3">
-          <span className="px-3 py-1 bg-gray-100 rounded-lg text-gray-800 font-medium shadow-sm hover:bg-gray-200 transition-colors text-[16px] sm:text-[18px]">
+          <span className="px-3 py-1 bg-gray-100 rounded-lg text-gray-800 font-medium shadow-sm hover:bg-gray-200 transition-colors text-[16px]">
            0544 796 77 70
           </span>
           <Link
@@ -82,10 +82,10 @@ export default function IletisimPage() {
         <div className="text-xl sm:text-2xl mr-4 text-blue-600">
          <FaPhone />
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
          <span className="font-semibold">Telefon:</span>
          <div className="flex items-center gap-3">
-          <span className="px-3 py-1 bg-gray-100 rounded-lg text-gray-800 font-medium shadow-sm text-[16px] sm:text-[18px]">
+          <span className="px-3 py-1 bg-gray-100 rounded-lg text-gray-800 font-medium shadow-sm hover:bg-gray-200 transition-colors text-[16px]">
            0501 349 69 91
           </span>
           <Link
