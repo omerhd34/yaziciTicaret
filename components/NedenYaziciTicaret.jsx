@@ -43,27 +43,27 @@ export default function NedenYaziciTicaret() {
  return (
   <section className="py-16 bg-gray-50">
    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 className="font-bold text-center mb-12 text-3xl sm:text-5xl">Neden Yazıcı Ticaret?</h2>
+    <h2 className="font-bold text-center mb-12 text-2xl sm:text-5xl">Neden Yazıcı Ticaret?</h2>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
      {ozellikler.map((ozellik, index) => (
       <div
        key={index}
        className={`p-6 rounded-2xl shadow-xl transform transition-all duration-500 hover:-translate-y-2 hover:scale-103 text-white ${ozellik.bg}`}
       >
-       <div className="w-16 h-16 flex items-center justify-center bg-white text-black rounded-full text-2xl mb-4 mx-auto shadow-md">
+       <div className="w-10 h-10 sm:w-16 sm:h-16 flex items-center justify-center bg-white text-black rounded-full text-2xl mb-4 mx-auto shadow-md">
         {ozellik.icon}
        </div>
-       <h3 className="text-xl font-bold mb-2 text-center">{ozellik.baslik}</h3>
-       <p className="text-center">{ozellik.aciklama}</p>
+       <h3 className="text-[18px] sm:text-[20px] font-bold mb-2 text-center">{ozellik.baslik}</h3>
+       <p className="text-center text-[16px] sm:text-[18px]">{ozellik.aciklama}</p>
       </div>
      ))}
     </div>
 
     <div className="mt-12 text-center bg-blue-600 text-white p-8 rounded-lg">
-     <h3 className="text-2xl font-bold mb-4">Yıllardır Güvenle Hizmetinizdeyiz</h3>
-     <p className="text-md">
-      1997 yılından bu yana İnegöl ve çevresinde, kaliteli beyaz eşya ürünleri ve güvenilir hizmet anlayışıyla sizlere hizmet veriyoruz.     </p>
+     <h3 className="text-xl sm:text-2xl font-bold mb-4">Yıllardır Güvenle Hizmetinizdeyiz</h3>
+     <p className="text-[16px] sm:text-[18px]">
+      1997 yılından bu yana İnegöl ve çevresinde, kaliteli beyaz eşya ürünleri ve güvenilir hizmet anlayışıyla sizlere hizmet veriyoruz.</p>
     </div>
    </div>
   </section>

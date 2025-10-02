@@ -42,11 +42,11 @@ export default function GaleriSection() {
  return (
   <section className="py-16 bg-gradient-to-b from-white to-gray-50">
    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-12">
-     <h2 className="font-bold text-gray-900 mb-4 text-3xl sm:text-5xl">
+    <div className="text-center mb-5 sm:mb-12">
+     <h2 className="font-bold text-gray-900 mb-4 text-2xl sm:text-5xl">
       Ürünlerimiz
      </h2>
-     <p className="text-lg text-gray-600">
+     <p className="text-[18px] sm:text-lg text-gray-600">
       Geniş ürün yelpazemizi keşfedin
      </p>
     </div>
@@ -73,10 +73,10 @@ export default function GaleriSection() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none"></div>
 
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white bg-gradient-to-t from-black/95 to-transparent">
-         <h3 className="text-2xl md:text-4xl font-bold mb-2">
+         <h3 className="text-[18px] md:text-4xl font-bold mb-2">
           {image.baslik}
          </h3>
-         <p className="text-sm md:text-lg text-gray-200">
+         <p className="text-[15px] md:text-lg text-gray-200">
           Kaliteli ve uygun fiyatlı {image.alt.toLowerCase()} ürünleri
          </p>
         </div>
@@ -86,20 +86,20 @@ export default function GaleriSection() {
 
      <button
       onClick={prevSlide}
-      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
+      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-2 sm:p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
       aria-label="Önceki"
      >
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
       </svg>
      </button>
 
      <button
       onClick={nextSlide}
-      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
+      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-2 sm:p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
       aria-label="Sonraki"
      >
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
       </svg>
      </button>

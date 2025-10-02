@@ -79,7 +79,7 @@ export default function DestekPage() {
  return (
   <div className="min-h-screen bg-gray-100 flex flex-col items-center py-16 px-4">
    <h1 className="text-3xl sm:text-4xl font-bold text-blue-800 mb-6">Destek</h1>
-   <p className="mb-8 text-center text-gray-700 max-w-xl">
+   <p className="mb-8 text-center text-gray-700 max-w-xl text-[16px] sm:text-[18px]">
     Lütfen aşağıdaki formu doldurarak bize ulaşın. En kısa sürede geri dönüş yapacağız.
    </p>
 
@@ -88,7 +88,7 @@ export default function DestekPage() {
     className="w-full max-w-xl bg-white p-8 rounded-lg shadow-lg space-y-6"
    >
     <div>
-     <label className="block text-sm font-medium text-gray-700 mb-1">
+     <label className="block font-medium text-gray-700 mb-1 text-[16px] sm:text-[18px]">
       Ad Soyad <span className="text-red-500">*</span>
      </label>
      <input
@@ -98,13 +98,13 @@ export default function DestekPage() {
       onChange={handleChange}
       required
       disabled={isSubmitting}
-      className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
-      placeholder="Adınız ve soyadınız"
+      className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 text-[16px] sm:text-[18px]"
+      placeholder="Ad & Soyad"
      />
     </div>
 
     <div>
-     <label className="block text-sm font-medium text-gray-700 mb-1">
+     <label className="block text-[16px] sm:text-[18px] font-medium text-gray-700 mb-1">
       Telefon <span className="text-red-500">*</span>
      </label>
      <input
@@ -114,13 +114,13 @@ export default function DestekPage() {
       onChange={handleChange}
       required
       disabled={isSubmitting}
-      className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+      className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 text-[16px] sm:text-[18px]"
       placeholder="05553332211"
      />
     </div>
 
     <div>
-     <label className="block text-sm font-medium text-gray-700 mb-1">
+     <label className="block text-[16px] sm:text-[18px] font-medium text-gray-700 mb-1">
       Konu <span className="text-red-500">*</span>
      </label>
      <input
@@ -130,13 +130,13 @@ export default function DestekPage() {
       onChange={handleChange}
       required
       disabled={isSubmitting}
-      className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+      className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 text-[16px] sm:text-[18px]"
       placeholder="Mesajınızın konusu"
      />
     </div>
 
     <div>
-     <label className="block text-sm font-medium text-gray-700 mb-1">
+     <label className="block text-[16px] sm:text-[18px] font-medium text-gray-700 mb-1">
       Mesaj <span className="text-red-500">*</span>
      </label>
      <textarea
@@ -145,8 +145,8 @@ export default function DestekPage() {
       onChange={handleChange}
       required
       disabled={isSubmitting}
-      rows={5}
-      className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+      rows={4}
+      className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 text-[16px] sm:text-[18px]"
       placeholder="Mesajınızı buraya yazın (En az 10 karakter)"
      ></textarea>
     </div>

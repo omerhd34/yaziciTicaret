@@ -71,17 +71,15 @@ export default function UrunIstegiPage() {
  };
 
  return (
-  <div className="py-16 bg-gray-50 min-h-screen">
+  <div className="py-10 sm:py-16 bg-gray-50 min-h-screen">
    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
     <h1 className="text-3xl sm:text-4xl font-bold text-center mb-8 text-blue-800">Ürün Talep Formu</h1>
     <div className="bg-white rounded-lg shadow-lg p-8">
-     <p className="text-gray-700 mb-6">
+     <p className="text-gray-700 mb-6 text-[16px] sm:text-[18px]">
       Aşağıdaki formu doldurarak ürün talebinde bulunabilirsiniz.
       En kısa sürede sizinle iletişime geçeceğiz.
      </p>
-
      <Message mesaj={mesaj} />
-
      <div>
       <FormInput
        label="Ad Soyad"
@@ -89,7 +87,7 @@ export default function UrunIstegiPage() {
        value={formData.adSoyad}
        onChange={handleChange}
        disabled={isSubmitting}
-       placeholder="Adınız ve soyadınız"
+       placeholder="Ad & Soyad"
        required
       />
 
@@ -118,7 +116,7 @@ export default function UrunIstegiPage() {
        onChange={handleChange}
        disabled={isSubmitting}
        rows={3}
-       placeholder="Teslimat adresinizi detaylı bir şekilde yazın"
+       placeholder="Teslimat adresinizi detaylı bir şekilde yazın."
        required
       />
 
@@ -129,7 +127,7 @@ export default function UrunIstegiPage() {
        onChange={handleChange}
        disabled={isSubmitting}
        rows={4}
-       placeholder="İstediğiniz ürün hakkında ek bilgiler yazabilirsiniz (en az 5 karakter)"
+       placeholder="İstediğiniz ürün hakkında bilgiler yazın."
        required
       />
 
