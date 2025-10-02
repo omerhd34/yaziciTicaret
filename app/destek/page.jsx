@@ -13,7 +13,7 @@ export default function DestekPage() {
 
  const handleChange = (e) => {
   setFormData({ ...formData, [e.target.name]: e.target.value });
-  if (status) setStatus(''); // Kullanıcı yazmaya başlayınca mesajı temizle
+  if (status) setStatus('');
  };
 
  const validateForm = () => {
@@ -156,7 +156,7 @@ export default function DestekPage() {
      disabled={isSubmitting}
      className="w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
     >
-     {isSubmitting ? 'Gönderiliyor...' : 'Gönder'}
+     Gönder
     </button>
 
     {status && (

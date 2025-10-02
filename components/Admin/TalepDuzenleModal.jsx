@@ -1,4 +1,6 @@
 "use client"
+import { formatTarih } from '@/app/utils/adminHelpers';
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 export default function TalepDuzenleModal({ talep, onClose, onSave }) {
@@ -27,17 +29,26 @@ export default function TalepDuzenleModal({ talep, onClose, onSave }) {
  return (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
    <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-screen overflow-y-auto">
-    <h3 className="text-2xl font-bold mb-4 text-center">Talep Düzenle</h3>
+    <h3 className="text-2xl font-bold mb-5 text-center">Talep Düzenle</h3>
 
     <div className="mb-4 space-y-2">
      <p>
       <span className="font-semibold">Ad Soyad:</span> {talep.adSoyad}
      </p>
      <p>
-      <span className="font-semibold">Telefon:</span> {talep.telefon}
+      <span className="font-semibold">Telefon No:</span> {talep.telefon}
+     </p>
+     <p>
+      <span className="font-semibold">Teslim Tarihi:</span> {talep.teslim}
+     </p>
+     <p>
+      <span className="font-semibold">Talep Zamanı:</span> {formatTarih(talep.olusturmaTarihi)}
+     </p>
+     <p>
+      <span className="font-semibold">Açıklama:</span>
+      <span className="font-bold text-red-500 cursor-pointer" onClick={onClose}>  Açıklamayı Gör</span>
      </p>
     </div>
-
     <div className="mb-4">
      <label className="block text-gray-700 font-semibold mb-2">
       Durum <span className="text-red-500 font-extrabold">*</span>

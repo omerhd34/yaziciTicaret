@@ -10,16 +10,16 @@ export default function DestekMesajlariSection({ mesajlar, onDelete }) {
    <h2 className="text-[20px] sm:text-2xl font-bold mb-4">Destek Mesajları</h2>
 
    {/* Masaüstü Tablo Görünümü */}
-   <div className="hidden md:block overflow-x-auto">
+   <div className="hidden lg:block overflow-x-auto">
     <table className="w-full table-fixed border-collapse">
      <thead className="bg-gray-100">
       <tr>
        <th className="px-4 py-3 text-left align-middle w-[18%]">Ad & Soyad</th>
-       <th className="px-4 py-3 text-left align-middle w-[13%]">Telefon No</th>
-       <th className="px-4 py-3 text-left align-middle w-[20%]">Konu</th>
-       <th className="px-4 py-3 text-left align-middle w-[17%]">Destek Zamanı</th>
+       <th className="px-4 py-3 text-left align-middle w-[15%]">Telefon No</th>
+       <th className="px-4 py-3 text-left align-middle w-[15%]">Konu</th>
+       <th className="px-4 py-3 text-left align-middle w-[20%]">Destek Zamanı</th>
        <th className="px-4 py-3 text-center align-middle w-[10%]">Mesaj</th>
-       <th className="px-4 py-3 text-center align-middle w-[12%]">İşlemler</th>
+       <th className="px-4 py-3 text-center align-middle w-[15%]">İşlemler</th>
       </tr>
      </thead>
      <tbody>
@@ -54,10 +54,10 @@ export default function DestekMesajlariSection({ mesajlar, onDelete }) {
         </tr>
         {mesajGosterilenId === (mesaj._id || index) && (
          <tr className="bg-gray-50">
-          <td colSpan={6} className="px-6 py-4">
+          <td colSpan={6} className="px-3 py-4">
            <div className="text-gray-700 text-sm">
             <strong className="block mb-2">Müşteri Mesajı:</strong>
-            <p className="whitespace-pre-wrap pl-4 border-l-4 border-blue-500">{mesaj.message}</p>
+            <p className="whitespace-pre-wrap break-words overflow-wrap-anywhere pl-4 border-l-4 border-blue-500">{mesaj.message}</p>
            </div>
           </td>
          </tr>
@@ -76,7 +76,7 @@ export default function DestekMesajlariSection({ mesajlar, onDelete }) {
    </div>
 
    {/* Mobil Kart Görünümü */}
-   <div className="md:hidden space-y-4">
+   <div className="lg:hidden space-y-4">
     {mesajlar.map((mesaj, index) => (
      <div key={mesaj._id || index} className="bg-white border rounded-lg p-4 shadow-sm">
       <div className="space-y-3">
@@ -113,7 +113,7 @@ export default function DestekMesajlariSection({ mesajlar, onDelete }) {
          <span>Mesajı Göster</span>
         </button>
         {mesajGosterilenId === (mesaj._id || index) && (
-         <div className="mt-2 p-3 bg-gray-50 rounded text-sm text-gray-700 whitespace-pre-wrap">
+         <div className="mt-2 p-3 bg-gray-50 rounded text-sm text-gray-700 whitespace-pre-wrap break-words overflow-wrap-anywhere">
           <strong>Müşteri Mesajı:</strong> {mesaj.message}
          </div>
         )}

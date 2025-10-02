@@ -10,16 +10,16 @@ export default function TaleplerSection({ talepler, onEdit, onDelete }) {
    <h2 className="text-xl sm:text-2xl font-bold mb-4">Tüm Talepler</h2>
 
    {/* Masaüstü Tablo Görünümü */}
-   <div className="hidden md:block overflow-x-auto">
+   <div className="hidden lg:block overflow-x-auto">
     <table className="w-full table-fixed border-collapse">
      <thead className="bg-gray-100">
       <tr>
-       <th className="px-4 py-3 text-left align-middle w-[15%]">Ad & Soyad</th>
-       <th className="px-4 py-3 text-left align-middle w-[13%]">Telefon No</th>
+       <th className="px-4 py-3 text-left align-middle w-[18%]">Ad & Soyad</th>
+       <th className="px-4 py-3 text-left align-middle w-[15%]">Telefon No</th>
        <th className="px-4 py-3 text-left align-middle w-[15%]">Teslim Tarihi</th>
-       <th className="px-4 py-3 text-left align-middle w-[15%]">Talep Zamanı</th>
+       <th className="px-4 py-3 text-left align-middle w-[20%]">Talep Zamanı</th>
        <th className="px-4 py-3 text-center align-middle w-[10%]">Açıklama</th>
-       <th className="px-4 py-3 text-center align-middle w-[17%]">İşlemler</th>
+       <th className="px-4 py-3 text-center align-middle w-[15%]">İşlemler</th>
       </tr>
      </thead>
      <tbody>
@@ -45,7 +45,7 @@ export default function TaleplerSection({ talepler, onEdit, onDelete }) {
            </button>
           </td>
           <td className="px-4 py-4 text-center align-middle">
-           <div className="inline-flex gap-2">
+           <div className="inline-flex gap-1">
             <button
              onClick={() => onEdit(talep)}
              className="bg-blue-600 text-white px-3 py-1.5 rounded text-sm hover:bg-blue-700 transition-colors whitespace-nowrap"
@@ -63,10 +63,10 @@ export default function TaleplerSection({ talepler, onEdit, onDelete }) {
          </tr>
          {aciklamaGosterilenId === talep._id && talep.aciklama && (
           <tr className="bg-gray-50">
-           <td colSpan={6} className="px-6 py-4">
-            <div className="text-gray-700 text-sm">
+           <td colSpan={6} className="px-3 py-4">
+            <div className="text-gray-700 text-[16px]">
              <strong className="block mb-2">Müşteri Açıklaması:</strong>
-             <p className="whitespace-pre-wrap pl-4 border-l-4 border-blue-500">{talep.aciklama}</p>
+             <p className="whitespace-pre-wrap break-words overflow-wrap-anywhere pl-4 border-l-4 border-blue-500">{talep.aciklama}</p>
             </div>
            </td>
           </tr>
@@ -86,7 +86,7 @@ export default function TaleplerSection({ talepler, onEdit, onDelete }) {
    </div>
 
    {/* Mobil Kart Görünümü */}
-   <div className="md:hidden space-y-4">
+   <div className="lg:hidden space-y-4">
     {talepler.map((talep) => {
      const bgColor = getDurumRenk(talep.durum);
 
@@ -126,8 +126,8 @@ export default function TaleplerSection({ talepler, onEdit, onDelete }) {
           <span>Açıklamayı Göster</span>
          </button>
          {aciklamaGosterilenId === talep._id && talep.aciklama && (
-          <div className="mt-2 p-3 bg-gray-50 rounded text-sm text-gray-700 whitespace-pre-wrap">
-           <strong>Müşteri Açıklaması:</strong> {talep.aciklama}
+          <div className="mt-2 p-3 bg-gray-50 rounded text-sm text-gray-700 whitespace-pre-wrap break-words overflow-wrap-anywhere">
+           <p className="whitespace-pre-wrap break-words overflow-wrap-anywhere pl-4 border-l-4 border-blue-500">{talep.aciklama}</p>
           </div>
          )}
         </div>
