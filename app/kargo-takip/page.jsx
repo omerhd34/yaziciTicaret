@@ -201,9 +201,6 @@ export default function KargoTakipPage() {
           <span className={`px-4 py-2 rounded-full font-semibold border ${getDurumRenk(kargo.durum)}`}>
            {kargo.durum}
           </span>
-          <span className="text-sm text-gray-500 mr-10">
-           Talep: {formatTarih(kargo.olusturmaTarihi)}
-          </span>
          </div>
 
          <div className="border-t pt-4 space-y-2">
@@ -215,6 +212,9 @@ export default function KargoTakipPage() {
           </p>
           <p className="text-gray-700 break-words">
            <span className="font-semibold">Telefon:</span> {kargo.telefon}
+          </p>
+          <p className="text-gray-700 break-words">
+           <span className="font-semibold">Talep Zamanı:</span> {formatTarih(kargo.olusturmaTarihi)}
           </p>
           {kargo.teslim && (
            <p className="text-gray-700 break-words">
@@ -236,7 +236,7 @@ export default function KargoTakipPage() {
              <svg className="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
              </svg>
-             Talebiniz Hakkında:
+             Taleb Cevabı:
             </p>
             <p className="text-green-800 whitespace-pre-wrap break-words overflow-wrap-anywhere max-w-full">
              {kargo.adminCevap}
