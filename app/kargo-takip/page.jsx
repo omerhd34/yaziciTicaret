@@ -65,7 +65,13 @@ export default function KargoTakipPage() {
    if (isNaN(tarih.getTime())) {
     return tarihStr;
    }
-   return tarih.toLocaleDateString('tr-TR');
+   return tarih.toLocaleString('tr-TR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+   });
   } catch (error) {
    return tarihStr;
   }
@@ -114,7 +120,7 @@ export default function KargoTakipPage() {
     </div>
 
     {mesaj && (
-     <div className="bg-yellow-100 border border-yellow-400 text-yellow-800 p-4 rounded-lg mb-6">
+     <div className="bg-yellow-100 border border-yellow-400 text-yellow-800 p-4 rounded-lg mb-6 break-words">
       {mesaj}
      </div>
     )}
@@ -124,7 +130,7 @@ export default function KargoTakipPage() {
       <h2 className="text-2xl font-bold mb-4">Talepleriniz</h2>
       <div className="space-y-4">
        {kargolar.map((kargo) => (
-        <div key={kargo._id} className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+        <div key={kargo._id} className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow overflow-hidden">
          <div className="flex justify-between items-start mb-4">
           <span className={`px-4 py-2 rounded-full font-semibold border ${getDurumRenk(kargo.durum)}`}>
            {kargo.durum}
@@ -135,36 +141,41 @@ export default function KargoTakipPage() {
          </div>
 
          <div className="border-t pt-4 space-y-2">
-          <p className="text-gray-700">
+          <p className="text-gray-700 break-words">
            <span className="font-semibold">Ad Soyad:</span> {kargo.adSoyad}
           </p>
-          <p className="text-gray-700">
+          <p className="text-gray-700 break-words">
            <span className="font-semibold">Adres:</span> {kargo.adres}
           </p>
-          <p className="text-gray-700">
+          <p className="text-gray-700 break-words">
            <span className="font-semibold">Telefon:</span> {kargo.telefon}
           </p>
           {kargo.teslim && (
-           <p className="text-gray-700">
+           <p className="text-gray-700 break-words">
             <span className="font-semibold">İstenilen Teslim Tarihi:</span> {kargo.teslim}
            </p>
           )}
           {kargo.aciklama && (
-           <p className="text-gray-700">
-            <span className="font-semibold">Açıklama:</span> {kargo.aciklama}
-           </p>
+           <div className="text-gray-700">
+            <span className="font-semibold">Açıklama:</span>
+            <p className="mt-1 p-3 bg-gray-50 rounded-lg whitespace-pre-wrap break-words overflow-wrap-anywhere max-w-full">
+             {kargo.aciklama}
+            </p>
+           </div>
           )}
 
           {/* Admin Cevabı - Sadece Başarılı İstek durumunda göster */}
           {kargo.durum === 'Başarılı İstek' && kargo.adminCevap && (
-           <div className="mt-4 bg-green-50 border-l-4 border-green-500 p-4 rounded">
+           <div className="mt-4 bg-green-50 border-l-4 border-green-500 p-4 rounded overflow-hidden">
             <p className="text-green-900 font-semibold mb-1 flex items-center">
-             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <svg className="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
              </svg>
              Talebiniz Hakkında:
             </p>
-            <p className="text-green-800 whitespace-pre-wrap">{kargo.adminCevap}</p>
+            <p className="text-green-800 whitespace-pre-wrap break-words overflow-wrap-anywhere max-w-full">
+             {kargo.adminCevap}
+            </p>
            </div>
           )}
          </div>
