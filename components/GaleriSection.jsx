@@ -37,9 +37,8 @@ export default function GaleriSection() {
  };
 
  return (
-  <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+  <section className="py-16 bg-gray-50 ">
    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    {/* Başlık */}
     <div className="text-center mb-5 sm:mb-12">
      <h2 className="font-bold text-gray-900 mb-4 text-2xl sm:text-5xl">
       Ürünlerimiz
@@ -49,7 +48,6 @@ export default function GaleriSection() {
      </p>
     </div>
 
-    {/* Kartlı Slider */}
     <div className="relative">
      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {images

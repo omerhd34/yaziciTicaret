@@ -98,7 +98,7 @@ export default function UrunIstegiPage() {
        value={formData.telefon}
        onChange={handleChange}
        disabled={isSubmitting}
-       placeholder="05553332211"
+       placeholder="0XXXXXXXXXX"
        required
       />
 

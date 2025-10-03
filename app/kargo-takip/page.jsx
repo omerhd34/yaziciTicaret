@@ -162,7 +162,7 @@ export default function KargoTakipPage() {
         onKeyPress={handleKeyPress}
         disabled={yukleniyor}
         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-[16px] sm:text-[18px]"
-        placeholder="05553332211"
+        placeholder="0XXXXXXXXXX"
        />
       </div>
 

@@ -3,7 +3,7 @@ import Logo2 from '../Logo2';
 
 export default function FooterBrand() {
  return (
-  <div className="space-y-4 hidden md:block">
+  <div className="hidden md:block sm:mb-5 sm:space-y-4">
    <Link href="/" className="flex items-center space-x-3 group">
     <Logo2 />
     <div>
@@ -13,10 +13,8 @@ export default function FooterBrand() {
      <span className="text-sm text-gray-400">DTM</span>
     </div>
    </Link>
-
-   <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-    1997'den beri güvenilir ve kaliteli beyaz eşya hizmetleri sunuyoruz. Müşteri memnuniyeti önceliğimizdir.
-   </p>
+   <p className="text-gray-400 text-sm leading-relaxed max-w-xs mb-0">1997'den beri güvenilir ve kaliteli beyaz eşya hizmetleri sunuyoruz.</p>
+   <p className="text-gray-400 text-sm leading-relaxed max-w-xs">Müşteri memnuniyeti önceliğimizdir.</p>
   </div>
  );
 }

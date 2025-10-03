@@ -115,7 +115,7 @@ export default function DestekPage() {
       required
       disabled={isSubmitting}
       className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 text-[16px] sm:text-[18px]"
-      placeholder="05553332211"
+      placeholder="0XXXXXXXXXX"
      />
     </div>
 
@@ -147,7 +147,7 @@ export default function DestekPage() {
       disabled={isSubmitting}
       rows={4}
       className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 text-[16px] sm:text-[18px]"
-      placeholder="Mesajınızı buraya yazın (En az 10 karakter)"
+      placeholder="Mesajınızı buraya yazın. (En az 10 karakter)"
      ></textarea>
     </div>
 

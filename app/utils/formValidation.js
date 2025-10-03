@@ -16,7 +16,7 @@ export const validateForm = (formData, setMesaj) => {
   }
 
   if (temizTelefon.length !== 11) {
-    setMesaj("Telefon numarası 11 haneli olmalıdır (örn: 05553332211)");
+    setMesaj("Telefon numarası 11 haneli olmalıdır (örn: 0XXXXXXXXXX)");
     return false;
   }
 

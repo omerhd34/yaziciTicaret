@@ -1,4 +1,4 @@
-import { FaMapMarkerAlt, FaPhone, FaClock } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 export default function FooterContact({ isAdmin = false }) {
  return (
   <div className="space-y-4">
@@ -43,21 +43,6 @@ export default function FooterContact({ isAdmin = false }) {
       <p className="text-xs text-gray-500">Mağaza 2</p>
      </div>
     </div>
-
-    {!isAdmin && (
-     <div className="flex items-start gap-3 group">
-      <div className="mt-1 text-purple-400 group-hover:text-purple-300 transition-colors">
-       <FaClock className="text-lg" />
-      </div>
-      <div>
-       <p className="text-gray-400 text-sm">
-        Hafta İçi: 09:00 - 19:00<br />
-        Cumartesi: 09:00 - 19:00<br />
-        Pazar: 12:00 - 17:00
-       </p>
-      </div>
-     </div>
-    )}
    </div>
   </div>
  );
