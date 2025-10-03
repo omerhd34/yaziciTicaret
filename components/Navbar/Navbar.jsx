@@ -1,11 +1,11 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import NavbarLogo from './Navbar/NavbarLogo';
-import NavbarDesktopMenu from './Navbar/NavbarDesktopMenu';
-import NavbarMobileMenu from './Navbar/NavbarMobileMenu';
-import NavbarAdminSection from './Navbar/NavbarAdminSection';
-import MobileMenuToggle from './Navbar/MobileMenuToggle';
+import NavbarLogo from './NavbarLogo';
+import NavbarDesktopMenu from './NavbarDesktopMenu';
+import NavbarMobileMenu from './NavbarMobileMenu';
+import NavbarAdminSection from './NavbarAdminSection';
+import MobileMenuToggle from './MobileMenuToggle';
 
 export default function Navbar() {
  const [isOpen, setIsOpen] = useState(false);
