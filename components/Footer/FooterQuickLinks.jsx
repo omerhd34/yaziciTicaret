@@ -11,7 +11,7 @@ export default function FooterQuickLinks() {
  ];
 
  return (
-  <div className="space-y-4">
+  <div className="space-y-4 hidden md:block">
    <h4 className="text-lg font-bold mb-4 flex items-center gap-2">
     <span className="w-8 h-0.5 bg-gradient-to-r from-blue-500 to-transparent"></span>
     Hızlı Linkler

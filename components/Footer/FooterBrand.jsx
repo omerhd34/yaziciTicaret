@@ -1,13 +1,11 @@
 import Link from 'next/link';
-import { FaStore } from 'react-icons/fa';
+import Logo2 from '../Logo2';
 
 export default function FooterBrand() {
  return (
-  <div className="space-y-4">
+  <div className="space-y-4 hidden md:block">
    <Link href="/" className="flex items-center space-x-3 group">
-    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 shadow-lg">
-     <FaStore className="text-white text-2xl" />
-    </div>
+    <Logo2 />
     <div>
      <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
       Yazıcı Ticaret

@@ -1,5 +1,4 @@
 import { FaMapMarkerAlt, FaPhone, FaClock } from 'react-icons/fa';
-
 export default function FooterContact({ isAdmin = false }) {
  return (
   <div className="space-y-4">

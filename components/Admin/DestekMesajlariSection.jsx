@@ -25,7 +25,7 @@ export default function DestekMesajlariSection({ mesajlar, onDelete }) {
  };
 
  return (
-  <div className="bg-white rounded-lg shadow-lg p-6 mt-8">
+  <div className="bg-white rounded-lg shadow-lg p-6 mt-8 mb-16">
    <h2 className="text-[20px] sm:text-2xl font-bold mb-4">Destek Mesajları</h2>
 
    {/* Masaüstü Tablo Görünümü */}

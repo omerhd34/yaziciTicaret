@@ -16,7 +16,7 @@ export default function Footer() {
  }, [pathname]);
 
  return (
-  <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white mt-16 relative overflow-hidden">
+  <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden">
    <div className="absolute inset-0 opacity-10">
     <div className="absolute -top-20 -left-20 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
     <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
@@ -30,7 +30,7 @@ export default function Footer() {
      </div>
     ) : (
      <>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-15 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-15 mb-0 md:mb-10">
        <div className="flex justify-center md:justify-start">
         <FooterBrand />
        </div>
