@@ -63,6 +63,7 @@ export default function TalepDuzenleModal({ talep, onClose, onSave }) {
        <option value="Yeni İstek">Yeni İstek</option>
        <option value="İstek İnceleniyor">İstek İnceleniyor</option>
        <option value="Başarılı İstek">Başarılı İstek</option>
+       <option value="İptal Edildi">İptal Edildi</option>
       </select>
       <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
        <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -6,6 +6,8 @@ export function getDurumRenk(durum) {
       return "bg-purple-50";
     case "Başarılı İstek":
       return "bg-green-50";
+    case "İptal Edildi":
+      return "bg-red-50";
     default:
       return "bg-white";
   }
