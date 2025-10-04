@@ -40,7 +40,6 @@ export async function POST(request) {
   }
 }
 
-// Token doğrulama için yardımcı fonksiyon (diğer route'larda kullanılabilir)
 export function verifyToken(token) {
   if (!token) return false;
   try {
