@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { AiOutlineEye } from 'react-icons/ai';
 import { formatTarih } from '@/app/utils/adminHelpers';
 
 export default function DestekMesajlariSection({ mesajlar, onDelete }) {
@@ -59,7 +59,7 @@ export default function DestekMesajlariSection({ mesajlar, onDelete }) {
            className="inline-flex items-center justify-center text-blue-600 hover:text-blue-800 transition-colors mx-auto"
            title="Mesajı Göster/Gizle"
           >
-           <AiOutlineInfoCircle className="h-5 w-5" />
+           <AiOutlineEye className="h-5 w-5" />
           </button>
          </td>
          <td className="px-4 py-4 text-center align-middle">
@@ -128,7 +128,7 @@ export default function DestekMesajlariSection({ mesajlar, onDelete }) {
          }
          className="flex items-center gap-2 text-blue-600 font-semibold"
         >
-         <AiOutlineInfoCircle className="h-5 w-5" />
+         <AiOutlineEye className="h-5 w-5" />
          <span>Mesajı Göster</span>
         </button>
         {mesajGosterilenId === (mesaj._id || index) && (

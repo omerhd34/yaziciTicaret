@@ -76,7 +76,6 @@ export default function GaleriSection() {
        ))}
      </div>
 
-     {/* Pagination */}
      <div className="flex justify-center items-center gap-3 mt-8">
       <button
        onClick={prevSlide}
