@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaWhatsapp, FaMapMarkerAlt, FaPhone, FaTimes } from "react-icons/fa";
+import { FaWhatsapp, FaMapMarkerAlt, FaPhone, FaTimes, FaEnvelope } from "react-icons/fa";
 
 export default function IletisimPage() {
  const kurulus_yili = 1997;
@@ -61,16 +61,31 @@ export default function IletisimPage() {
          </div>
         </div>
        </div>
+
+       <div className="flex items-start">
+        <div className="text-xl sm:text-2xl mr-4 text-blue-600">
+         <FaEnvelope />
+        </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+         <span className="font-semibold">Mail:</span>
+         <Link
+          href="mailto:ilhan@yazici.gen.tr"
+          className="px-3 py-1 bg-gray-100 rounded-lg text-gray-800 font-medium shadow-sm hover:bg-gray-200 transition-colors text-[16px]"
+         >
+          ilhan@yazici.gen.tr
+         </Link>
+        </div>
+       </div>
       </div>
 
       <div className="mt-6 grid grid-cols-2 gap-3">
        <div
-        onClick={() => openImage("/prof1_ibo.png", "Mağaza 1")}
+        onClick={() => openImage("/prof2_ibo.jpg", "Mağaza 1")}
         className="group relative overflow-hidden rounded-lg shadow-md border-2 border-gray-100 hover:shadow-2xl transition-all duration-500 cursor-pointer"
        >
         <div className="overflow-hidden">
          <Image
-          src="/prof1_ibo.png"
+          src="/prof2_ibo.jpg"
           width={500}
           height={300}
           alt="Mağaza 1 - Görsel 1"
@@ -132,6 +147,21 @@ export default function IletisimPage() {
            <FaWhatsapp className="text-xl" />
           </Link>
          </div>
+        </div>
+       </div>
+
+       <div className="flex items-start">
+        <div className="text-xl sm:text-2xl mr-4 text-blue-600">
+         <FaEnvelope />
+        </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+         <span className="font-semibold">Mail:</span>
+         <Link
+          href="mailto:ilhan@yazici.gen.tr"
+          className="px-3 py-1 bg-gray-100 rounded-lg text-gray-800 font-medium shadow-sm hover:bg-gray-200 transition-colors text-[16px]"
+         >
+          ilhan@yazici.gen.tr
+         </Link>
         </div>
        </div>
       </div>
