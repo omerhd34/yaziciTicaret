@@ -22,7 +22,6 @@ export default function HeroSection() {
       Hızlı ve Güvenilir Teslimat
      </div>
 
-     {/* Main Heading */}
      <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">
       <span className="block">Yazıcı Ticaret</span>
       <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white mt-2">
@@ -30,12 +29,11 @@ export default function HeroSection() {
       </span>
      </h1>
 
-     {/* Subheading */}
      <p className="text-base sm:text-xl md:text-2xl mb-4 font-light text-blue-100">
       Depoda Bekleyen Teslimatlarınız
      </p>
      <p className="text-sm sm:text-base md:text-lg mb-10 text-blue-200 max-w-2xl mx-auto">
-      Beyaz eşya, televizyon ve ankastre ürünleriniz güvenle sizleri bekliyor.
+      Beyaz eşyadan elektroniğe kadar tüm ürünlerimiz, güvenle sizleri bekliyor.
      </p>
 
      {/* CTA Buttons */}
