@@ -1,107 +1,157 @@
 'use client';
-import { useState } from 'react';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function GaleriSection() {
  const [currentIndex, setCurrentIndex] = useState(0);
+ const [itemsPerPage, setItemsPerPage] = useState(3);
 
  const images = [
-  { id: 1, url: './tv.png', alt: 'Televizyon', baslik: 'Akıllı Televizyonlar' },
-  { id: 2, url: './supurge.png', alt: 'Elektrikli Süpürge', baslik: 'Elektrikli Süpürge' },
-  { id: 3, url: './bulasık.png', alt: 'Bulaşık Makinesi', baslik: 'Bulaşık Makinesi' },
-  { id: 4, url: './camasır.png', alt: 'Çamaşır Makinesi', baslik: 'Çamaşır Makinesi' },
-  { id: 5, url: './kurutma.png', alt: 'Kurutma Makinesi', baslik: 'Kurutma Makinesi' },
-  { id: 6, url: './ocak.png', alt: 'Ocak', baslik: 'Ocak' },
-  { id: 7, url: './fırın.png', alt: 'Fırın', baslik: 'Fırın' },
-  { id: 8, url: './mikrodalga.png', alt: 'Mikrodalga', baslik: 'Mikrodalga' },
-  { id: 9, url: './ankastre.png', alt: 'Ankastre', baslik: 'Ankastre Set' },
-  { id: 10, url: './klima.png', alt: 'Klima', baslik: 'Klima' },
-  { id: 11, url: './suaritma.png', alt: 'Su Arıtma', baslik: 'Su Arıtma Cihazı' },
-  { id: 12, url: './susebili.png', alt: 'Su Sebili', baslik: 'Su Sebili' },
+  { id: 1, url: './tv.png', alt: 'Televizyon', baslik: 'Akıllı Televizyonlar', urunler: 'Samsung, LG, Philips, Grundig', desc: 'Yüksek çözünürlük ve akıllı özelliklerle görsel şölen sunan televizyonlar' },
+  { id: 2, url: './supurge.png', alt: 'Elektrikli Süpürge', baslik: 'Elektrikli Süpürge', urunler: 'Profilo, Philips, Miele, Arnica, Karcher', desc: 'Güçlü emme performansı ile evinizi tertemiz yapan elektrikli süpürgeler' },
+  { id: 3, url: './bulasık.png', alt: 'Bulaşık Makinesi', baslik: 'Bulaşık Makinesi', urunler: 'Profilo, Electrolux, Grundig', desc: 'Enerji tasarruflu ve sessiz çalışan bulaşık makineleri ile pratik temizlik' },
+  { id: 4, url: './camasır.png', alt: 'Çamaşır Makinesi', baslik: 'Çamaşır Makinesi', urunler: 'Profilo, Electrolux, Grundig', desc: 'Çamaşırlarınıza özen gösteren yeni nesil çamaşır makineleri' },
+  { id: 5, url: './kurutma.png', alt: 'Kurutma Makinesi', baslik: 'Kurutma Makinesi', urunler: 'Profilo, Electrolux, Grundig', desc: 'Hızlı ve etkili kurutma teknolojisi ile zamandan tasarruf edin' },
+  { id: 6, url: './ocak.png', alt: 'Ocak', baslik: 'Ocak', urunler: 'Profilo, Simfer, Ferre', desc: 'Güvenli ve verimli pişirme deneyimi sunan modern ocaklar' },
+  { id: 7, url: './fırın.png', alt: 'Fırın', baslik: 'Fırın', urunler: 'Profilo, Simfer', desc: 'Profesyonel pişirme sonuçları için son teknoloji fırınlar' },
+  { id: 8, url: './mikrodalga.png', alt: 'Mikrodalga', baslik: 'Mikrodalga', urunler: 'Profilo, Simfer', desc: 'Hızlı ısıtma ve pişirme için pratik mikrodalga çözümleri' },
+  { id: 9, url: './ankastre.png', alt: 'Ankastre', baslik: 'Ankastre Set', urunler: 'Profilo, Simfer, Ferre', desc: 'Mutfağınızı şıklıkla tamamlayan ankastre ürün setleri' },
+  { id: 10, url: './klima.png', alt: 'Klima', baslik: 'Klima', urunler: 'Profilo, Airfel, Daikin, Mitsubishi', desc: 'Her mevsim konforlu bir ortam için enerji tasarruflu klimalar' },
+  { id: 11, url: './suaritma.png', alt: 'Su Arıtma', baslik: 'Su Arıtma Cihazı', urunler: 'Profilo', desc: 'Sağlıklı ve temiz su için güvenilir arıtma sistemleri' },
+  { id: 12, url: './susebili.png', alt: 'Su Sebili', baslik: 'Su Sebili', urunler: 'Profilo', desc: 'Sıcak ve soğuk su ihtiyacınız için pratik su sebilleri' },
  ];
 
+ useEffect(() => {
+  const handleResize = () => {
+   const width = window.innerWidth;
+   if (width < 640) {
+    setItemsPerPage(1); // Mobile - 1 kolon
+   } else if (width >= 640 && width < 768) {
+    setItemsPerPage(2); // Small tablet - 2 kolon
+   } else if (width >= 768 && width < 1024) {
+    setItemsPerPage(2); // Tablet - 2 kolon
+   } else {
+    setItemsPerPage(3); // Desktop - 3 kolon
+   }
+  };
+
+  handleResize();
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+ }, []);
+
+ // Index değiştiğinde sınırları kontrol et
+ useEffect(() => {
+  if (currentIndex >= images.length) {
+   setCurrentIndex(0);
+  }
+ }, [itemsPerPage, currentIndex, images.length]);
+
+ const totalPages = Math.ceil(images.length / itemsPerPage);
+
  const nextSlide = () => {
-  setCurrentIndex((prev) =>
-   prev + 3 < images.length ? prev + 3 : 0
-  );
+  setCurrentIndex((prev) => {
+   const nextIndex = prev + itemsPerPage;
+   return nextIndex >= images.length ? 0 : nextIndex;
+  });
  };
 
  const prevSlide = () => {
-  setCurrentIndex((prev) =>
-   prev - 3 >= 0 ? prev - 3 : images.length - (images.length % 3 || 3)
-  );
+  setCurrentIndex((prev) => {
+   const prevIndex = prev - itemsPerPage;
+   return prevIndex < 0 ? (totalPages - 1) * itemsPerPage : prevIndex;
+  });
  };
 
- const goToSlide = (index) => {
-  setCurrentIndex(index);
+ const goToSlide = (pageIndex) => {
+  setCurrentIndex(pageIndex * itemsPerPage);
  };
+
+ const currentPage = Math.floor(currentIndex / itemsPerPage);
 
  return (
-  <section className="py-16 bg-gray-50 ">
-   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-5 sm:mb-12">
-     <h2 className="font-bold text-gray-900 mb-4 text-2xl sm:text-5xl">
+  <section className="py-6 sm:py-12 lg:py-16 bg-gray-50">
+   <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div className="text-center mb-5 sm:mb-10 lg:mb-12">
+     <h2 className="font-bold text-gray-900 mb-2 sm:mb-4 text-2xl sm:text-4xl lg:text-5xl">
       Ürünlerimiz
      </h2>
-     <p className="text-[18px] sm:text-lg text-gray-600">
-      Geniş ürün yelpazemizi keşfedin
+     <p className="text-[16px] sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-2">
+      Beyaz eşyadan elektronik ürünlere kadar geniş ürün yelpazemizi inceleyin ve size en uygun olanı bulun.
      </p>
     </div>
 
     <div className="relative">
-     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-6 min-h-[400px] sm:min-h-[450px]">
       {images
-       .slice(currentIndex, currentIndex + 3)
+       .slice(currentIndex, currentIndex + itemsPerPage)
        .map((image) => (
         <div
          key={image.id}
-         className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-500"
+         className="bg-white rounded-lg sm:rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
         >
-         <div className="w-full h-40 md:h-48 lg:h-56 overflow-hidden">
+         <div className="w-full h-44 sm:h-52 md:h-56 lg:h-60 overflow-hidden bg-gray-50 flex items-center justify-center p-3 sm:p-4">
           <img
            src={image.url}
            alt={image.alt}
            className="w-full h-full object-contain"
           />
          </div>
-         <div className="p-4">
-          <h3 className="text-base md:text-lg font-bold text-gray-900 mb-1">
+         <div className="p-3 sm:p-5 lg:p-6">
+          <h3 className="text-base sm:text-xl lg:text-2xl text-center font-bold text-blue-900 mb-1.5 sm:mb-3">
            {image.baslik}
           </h3>
-          <p className="text-gray-600 text-sm">
-           Kaliteli ve uygun fiyatlı {image.alt.toLowerCase()} ürünleri
+          <p className="text-gray-600 text-[16px] sm:text-base mb-2 sm:mb-4 leading-relaxed">
+           {image.desc}
           </p>
+          <div className="border-t pt-2 sm:pt-4">
+           <p className="text-sm sm:text-base font-bold text-gray-900 mb-1 sm:mb-2">
+            Satılan Markalar:
+           </p>
+           <p className="text-gray-600 text-xs sm:text-[16px] leading-relaxed">
+            {image.urunler}
+           </p>
+          </div>
          </div>
         </div>
        ))}
      </div>
 
-     <div className="flex justify-center items-center gap-3 mt-8">
+     {/* Navigation */}
+     <div className="flex justify-center items-center gap-1 sm:gap-3 mt-5 sm:mt-8 lg:mt-10 flex-wrap">
       <button
        onClick={prevSlide}
-       className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 shadow-md transition transform hover:scale-110"
+       className="p-2 sm:p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 shadow-md transition-all duration-200 transform hover:scale-110 active:scale-95"
+       aria-label="Önceki"
       >
-       <FiChevronLeft className="w-6 h-6" />
+       <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
       </button>
-      {Array.from({ length: Math.ceil(images.length / 3) }).map((_, index) => (
-       <button
-        key={index}
-        onClick={() => goToSlide(index * 3)}
-        className={`w-8 h-8 flex items-center justify-center rounded-md border font-medium
-                  ${currentIndex === index * 3
-          ? 'bg-blue-600 text-white border-blue-600'
-          : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
-         }
-                `}
-       >
-        {index + 1}
-       </button>
-      ))}
+
+      <div className="flex gap-1 sm:gap-2 flex-wrap justify-center max-w-[240px] sm:max-w-none">
+       {Array.from({ length: totalPages }).map((_, index) => (
+        <button
+         key={index}
+         onClick={() => goToSlide(index)}
+         className={`w-7 h-7 sm:w-9 sm:h-9 lg:w-10 lg:h-10 flex items-center justify-center rounded sm:rounded-lg border font-semibold text-xs sm:text-base transition-all duration-200
+                    ${currentPage === index
+           ? 'bg-blue-600 text-white border-blue-600 scale-110'
+           : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100 hover:border-gray-400'
+          }
+                  `}
+         aria-label={`Sayfa ${index + 1}`}
+         aria-current={currentPage === index ? 'page' : undefined}
+        >
+         {index + 1}
+        </button>
+       ))}
+      </div>
+
       <button
        onClick={nextSlide}
-       className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 shadow-md transition transform hover:scale-110"
+       className="p-2 sm:p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 shadow-md transition-all duration-200 transform hover:scale-110 active:scale-95"
+       aria-label="Sonraki"
       >
-       <FiChevronRight className="w-6 h-6" />
+       <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
       </button>
      </div>
     </div>

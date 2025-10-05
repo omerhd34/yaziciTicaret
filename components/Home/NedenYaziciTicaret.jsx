@@ -54,7 +54,7 @@ export default function NedenYaziciTicaret() {
        <div className="w-10 h-10 sm:w-16 sm:h-16 flex items-center justify-center bg-white text-black rounded-full text-2xl mb-4 mx-auto shadow-md">
         {ozellik.icon}
        </div>
-       <h3 className="text-[18px] sm:text-[20px] font-bold mb-2 text-center">{ozellik.baslik}</h3>
+       <h3 className="text-[18px] sm:text-[20px] font-bold mb-2 text-center ">{ozellik.baslik}</h3>
        <p className="text-center text-[16px] sm:text-[18px]">{ozellik.aciklama}</p>
       </div>
      ))}

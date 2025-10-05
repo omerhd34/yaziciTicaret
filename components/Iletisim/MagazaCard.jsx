@@ -6,7 +6,23 @@ import { FaWhatsapp, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa'
 export default function MagazaCard({ title, adres, telefon, whatsappLink, email, images, onImageClick }) {
  return (
   <div className="bg-white rounded-lg shadow-lg p-8">
-   <h2 className="text-[20px] sm:text-2xl font-bold mb-6 text-blue-600">{title}</h2>
+   <h2 className="text-[20px] sm:text-2xl font-bold mb-6 text-blue-600 flex items-center">
+    {title}
+    <Link
+     href="https://www.profilo.com/tr/"
+     target="_blank"
+     rel="noopener noreferrer"
+     className="inline-block ml-2 hover:opacity-80 transition-opacity"
+    >
+     <Image
+      src="/prof.png"
+      alt="Profilo"
+      width={40}
+      height={40}
+      className="inline-block"
+     />
+    </Link>
+   </h2>
    <div className="space-y-4">
     <div className="flex items-start">
      <div className="text-xl sm:text-2xl mr-4 text-blue-600">

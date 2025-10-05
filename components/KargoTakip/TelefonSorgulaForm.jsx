@@ -16,7 +16,8 @@ export default function TelefonSorgulaForm({ telefon, onChange, onSubmit, yuklen
    <div>
     <div className="mb-4">
      <label className="block text-gray-700 font-semibold mb-2 text-[16px] sm:text-[18px]">
-      Telefon Numarası *
+      Telefon Numarası
+      <span className="text-red-500 font-extrabold ml-1">*</span>
      </label>
      <input
       type="tel"

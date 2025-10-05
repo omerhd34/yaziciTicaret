@@ -2,10 +2,10 @@ import {
   FaHome,
   FaBoxOpen,
   FaTruck,
-  FaLifeRing,
   FaEnvelope,
   FaUserShield,
 } from "react-icons/fa";
+import { BiSupport } from "react-icons/bi";
 
 export const menuItems = [
   {
@@ -25,7 +25,7 @@ export const menuItems = [
   },
   {
     href: "/destek",
-    icon: FaLifeRing,
+    icon: BiSupport,
     label: "Destek",
   },
   {

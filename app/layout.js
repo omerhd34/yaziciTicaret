@@ -8,8 +8,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Yazıcı Ticaret",
-  description: "Güvenilir ve hızlı kargo teslimat hizmetleri",
-  icons: "/favicon.png",
+  description: "Güvenilir ve hızlı iletişim hizmetleri",
+  icons: "/logo.svg",
 };
 
 export default function RootLayout({ children }) {

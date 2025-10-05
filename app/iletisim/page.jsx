@@ -17,7 +17,7 @@ export default function IletisimPage() {
  };
 
  const magaza1 = {
-  title: "Mağaza 1",
+  title: "Mağaza 1 - Profilo",
   adres: "Kemalpaşa, Atatürk Blv. No:54/E 16400 İnegöl/Bursa",
   telefon: "0544 796 77 70",
   whatsappLink: "https://wa.me/905447967770",
@@ -29,7 +29,7 @@ export default function IletisimPage() {
  };
 
  const magaza2 = {
-  title: "Mağaza 2",
+  title: "Mağaza 2 - Profilo",
   adres: "Cuma mah. Atatürk bulvarı No:51 16400 İnegöl/Bursa",
   telefon: "0501 349 69 91",
   whatsappLink: "https://wa.me/905013496991",

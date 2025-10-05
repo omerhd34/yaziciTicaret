@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <circle cx="40" cy="40" r="40" fill="#1e40af"/>
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-size="42" font-weight="bold" fill="white" font-family="Arial, sans-serif" dy=".2em">
+    YT
+  </text>
+</svg>
