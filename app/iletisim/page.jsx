@@ -21,7 +21,7 @@ export default function IletisimPage() {
   adres: "Kemalpaşa, Atatürk Blv. No:54/E 16400 İnegöl/Bursa",
   telefon: "0544 796 77 70",
   whatsappLink: "https://wa.me/905447967770",
-  email: "ilhan@yazici.gen.tr",
+  email: "info@yazici.gen.tr",
   images: [
    { url: "/prof2_ibo.jpg", alt: "Mağaza 1 - Görsel 1" },
    { url: "/prof1_ibo.png", alt: "Mağaza 1 - Görsel 2" }
@@ -33,7 +33,7 @@ export default function IletisimPage() {
   adres: "Cuma mah. Atatürk bulvarı No:51 16400 İnegöl/Bursa",
   telefon: "0501 349 69 91",
   whatsappLink: "https://wa.me/905013496991",
-  email: "ilhan@yazici.gen.tr",
+  email: "info@yazici.gen.tr",
   images: [
    { url: "/prof2_bedo.jpg", alt: "Mağaza 2 - Görsel 1" },
    { url: "/prof1_bedo.jpg", alt: "Mağaza 2 - Görsel 2" }

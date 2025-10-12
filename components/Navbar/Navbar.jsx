@@ -30,7 +30,7 @@ export default function Navbar() {
 
  return (
   <nav className="bg-gradient-to-r from-black via-blue-800 to-black text-white shadow-xl sticky top-0 z-50">
-   <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+   <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-10">
     <div className="flex justify-between h-16 md:h-20">
      {/* Logo */}
      <div className="flex items-center">

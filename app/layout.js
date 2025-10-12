@@ -7,16 +7,18 @@ import ContactFloatingButton from "@/components/ContactFloatingButton";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Yazıcı Ticaret",
-  description: "Güvenilir ve hızlı iletişim hizmetleri",
-  icons: "/logo.svg",
+  title: "Yazıcı Ticaret - PROFiLO Dayanıklı Ev Aletleri",
+  description: "PROFiLO dayanıklı ev aletleri - Güvenilir ve kaliteli ürünler",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="tr">
       <head>
-        <meta name="theme-color" content="#1e40af" />
+        <meta name="theme-color" content="#004B87" />
       </head>
       <body className={inter.className}>
         <Navbar />

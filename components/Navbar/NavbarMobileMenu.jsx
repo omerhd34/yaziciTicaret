@@ -1,6 +1,5 @@
-import Link from 'next/link';
 import NavbarMenuItem from './NavbarMenuItem';
-import { menuItems, adminMenuItem } from './menuItems';
+import { menuItems, } from './menuItems';
 
 export default function NavbarMobileMenu({ isOpen, currentPath, onClose }) {
  if (!isOpen) return null;
@@ -19,17 +18,6 @@ export default function NavbarMobileMenu({ isOpen, currentPath, onClose }) {
       onClick={onClose}
      />
     ))}
-
-    <Link
-     href={adminMenuItem.href}
-     className="block bg-gradient-to-r from-yellow-500 to-orange-500 px-4 py-3 rounded-lg font-semibold shadow-lg"
-     onClick={onClose}
-    >
-     <span className="flex items-center justify-end">
-      {adminMenuItem.label} Girişi
-      <adminMenuItem.icon className="ml-4" />
-     </span>
-    </Link>
    </div>
   </div>
  );

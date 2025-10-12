@@ -9,7 +9,7 @@ export default function ContactFloatingButton() {
    className="hidden sm:flex fixed top-1/2 right-0 -translate-y-1/2 z-50 bg-[#0F181E] text-white px-3 py-3 shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:px-4 group rounded-l-lg"
    style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
   >
-   <div className="flex items-center gap-2">
+   <div className="flex items-center gap-3">
     <FaEnvelope
      className="text-lg group-hover:scale-110 transition-transform"
      style={{ transform: 'rotate(90deg)' }}

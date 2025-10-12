@@ -8,7 +8,7 @@ export default function SirketBilgileri() {
    <div className="absolute bottom-0 left-0 w-48 h-48 bg-white opacity-5 rounded-full -ml-24 -mb-24"></div>
 
    <div className="relative z-10">
-    <h2 className="text-2xl sm:text-4xl font-bold mb-6 tracking-wide">Yazıcı Ticaret DTM</h2>
+    <h2 className="text-2xl sm:text-4xl font-bold mb-6 tracking-wide">Profilo Yazıcı Ticaret</h2>
 
     <div className="space-y-4 mb-8">
      <p className="text-lg sm:text-2xl font-semibold text-blue-100">

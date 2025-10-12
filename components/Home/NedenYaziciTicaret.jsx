@@ -16,7 +16,7 @@ export default function NedenYaziciTicaret() {
   },
   {
    baslik: 'Geniş Ürün Yelpazesi',
-   aciklama: 'Her ihtiyaca uygun yazıcı ve malzeme çeşitleri',
+   aciklama: 'Her ihtiyaca uygun beyaz eşya çeşitleri',
    icon: <FaBox />,
    bg: 'bg-gradient-to-r from-purple-400 to-purple-600'
   },
@@ -34,7 +34,7 @@ export default function NedenYaziciTicaret() {
   },
   {
    baslik: 'Canlı Takip',
-   aciklama: 'Ürün isteği durumunu anlık takip edilebilir.',
+   aciklama: 'Ürün isteği durumu anlık takip edilebilir.',
    icon: <FaEye />,
    bg: 'bg-gradient-to-r from-red-400 to-red-600'
   }
