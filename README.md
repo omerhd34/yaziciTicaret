@@ -130,22 +130,6 @@ npm start
 - `GET /api/destek` - Destek mesajlarını listele
 - `DELETE /api/destek` - Destek mesajı sil
 
-## 🎨 Özelleştirme
-
-### Renk Teması
-Tailwind CSS kullanılmaktadır. Renk paletini `tailwind.config.js` dosyasından özelleştirebilirsiniz.
-
-### Logo ve Marka
-- Logo bileşenleri: `components/Logo.jsx` ve `components/Logo2.jsx`
-- Navbar logosu: `components/Navbar/NavbarLogo.jsx`
-
-## 🐛 Bilinen Sorunlar ve Sınırlamalar
-
-- localStorage kullanımı (browser storage) - admin token yönetimi için
-- Client-side form validasyonu
-- Telefon numarası formatı Türkiye'ye özel (11 haneli, 0 ile başlayan)
-
-
 ## 👥 İletişim
 
 **Yazıcı Ticaret**
@@ -154,3 +138,4 @@ Tailwind CSS kullanılmaktadır. Renk paletini `tailwind.config.js` dosyasından
 - 📧 Email: info@yazici.gen.tr
 
 **Not**: Bu uygulama 1997'den beri hizmet veren Yazıcı Ticaret için geliştirilmiştir.
+
