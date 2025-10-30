@@ -6,7 +6,7 @@ export async function PUT(request) {
   try {
     const { id, durum, teslim, adminCevap } = await request.json();
     const client = await clientPromise;
-    const db = client.db("yaziciticaret");
+    const db = client.db("yazici");
 
     const guncellemeler = {
       durum,
@@ -48,7 +48,7 @@ export async function DELETE(request) {
   try {
     const { id } = await request.json();
     const client = await clientPromise;
-    const db = client.db("yaziciticaret");
+    const db = client.db("yazici");
     const result = await db
       .collection("talepler")
       .deleteOne({ _id: new ObjectId(id) });

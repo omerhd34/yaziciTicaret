@@ -14,9 +14,8 @@ export async function PUT(request) {
     }
 
     const client = await clientPromise;
-    const db = client.db("yaziciticaret");
+    const db = client.db("yazici");
 
-    // Önce talebin mevcut durumunu kontrol et
     const talep = await db
       .collection("talepler")
       .findOne({ _id: new ObjectId(id) });
@@ -28,7 +27,6 @@ export async function PUT(request) {
       );
     }
 
-    // Sadece "Yeni İstek" ve "İstek İnceleniyor" durumundaki talepler iptal edilebilir
     if (talep.durum !== "Yeni İstek" && talep.durum !== "İstek İnceleniyor") {
       return NextResponse.json(
         {
@@ -40,7 +38,6 @@ export async function PUT(request) {
       );
     }
 
-    // Talebi iptal et
     const result = await db.collection("talepler").updateOne(
       { _id: new ObjectId(id) },
       {

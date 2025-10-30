@@ -44,7 +44,7 @@ export async function POST(request) {
     }
 
     const client = await clientPromise;
-    const db = client.db("yaziciticaret");
+    const db = client.db("yazici");
 
     const yeniTalep = {
       adSoyad: adSoyad.trim(),
@@ -69,7 +69,7 @@ export async function POST(request) {
   } catch (error) {
     console.error("Talep oluşturma hatası:", error);
     return NextResponse.json(
-      { success: false, message: `Sunucu hatası: ${error.message}` },
+      { success: false, message: "Sunucu hatası" },
       { status: 500 }
     );
   }
@@ -78,7 +78,7 @@ export async function POST(request) {
 export async function GET() {
   try {
     const client = await clientPromise;
-    const db = client.db("yaziciticaret");
+    const db = client.db("yazici");
 
     const talepler = await db
       .collection("talepler")

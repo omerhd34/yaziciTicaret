@@ -21,7 +21,7 @@ export async function POST(req) {
     }
 
     const client = await clientPromise;
-    const db = client.db("yaziciticaret");
+    const db = client.db("yazici");
 
     const yeniMesaj = {
       name: data.name.trim(),
@@ -49,7 +49,7 @@ export async function POST(req) {
 export async function GET() {
   try {
     const client = await clientPromise;
-    const db = client.db("yaziciticaret");
+    const db = client.db("yazici");
 
     const mesajlar = await db
       .collection("destekMesajlari")
@@ -80,7 +80,7 @@ export async function DELETE(req) {
     }
 
     const client = await clientPromise;
-    const db = client.db("yaziciticaret");
+    const db = client.db("yazici");
 
     const result = await db
       .collection("destekMesajlari")

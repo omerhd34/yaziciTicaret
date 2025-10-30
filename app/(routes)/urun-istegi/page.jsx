@@ -1,10 +1,10 @@
 'use client';
 import { useState } from 'react';
-import { FormInput } from '../../components/Form/FormInput';
-import { FormTextarea } from '../../components/Form/FormTextarea';
-import { DateInput } from '../../components/Form/DateInput';
-import { Message } from '../../components/Form/Message';
-import { validateForm, temizleTelefon } from '../utils/formValidation';
+import { FormInput } from '../../../components/Form/FormInput';
+import { FormTextarea } from '../../../components/Form/FormTextarea';
+import { DateInput } from '../../../components/Form/DateInput';
+import { Message } from '../../../components/Form/Message';
+import { validateForm, temizleTelefon } from '../../utils/formValidation';
 
 export default function UrunIstegiPage() {
  const [formData, setFormData] = useState({

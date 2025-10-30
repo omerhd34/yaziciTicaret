@@ -45,7 +45,7 @@ export function verifyToken(token) {
   try {
     const decoded = Buffer.from(token, "base64").toString("utf-8");
     const [username] = decoded.split(":");
-    const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "yaziciticaret";
+    const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
     return username === ADMIN_USERNAME;
   } catch {
     return false;

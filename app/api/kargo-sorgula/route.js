@@ -27,7 +27,7 @@ export async function GET(request) {
     }
 
     const client = await clientPromise;
-    const db = client.db("yaziciticaret");
+    const db = client.db("yazici");
 
     const kargolar = await db
       .collection("talepler")
